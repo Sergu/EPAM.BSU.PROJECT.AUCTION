@@ -1,0 +1,489 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BetHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lot_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="coast" Type="int" Nullable="false" />
+          <Property Name="date" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lot">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="user_seller_id" Type="int" />
+          <Property Name="primaryCoast" Type="int" Nullable="false" />
+          <Property Name="beginDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="endDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="isActive" Type="int" Nullable="false" />
+          <Property Name="currentCoast" Type="int" />
+          <Property Name="user_bet_id" Type="int" />
+        </EntityType>
+        <EntityType Name="LotProperty">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lot_id" Type="int" Nullable="false" />
+          <Property Name="property" Type="ntext" Nullable="false" />
+          <Property Name="description" Type="ntext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="money" Type="int" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserInRole">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_bet_lot_id">
+          <End Role="Lot" Type="Self.Lot" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BetHistory" Type="Self.BetHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lot">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BetHistory">
+              <PropertyRef Name="lot_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserInRole" Type="Self.UserInRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserInRole">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_user">
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserInRole" Type="Self.UserInRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserInRole">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_lot_id">
+          <End Role="Lot" Type="Self.Lot" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LotProperty" Type="Self.LotProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lot">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LotProperty">
+              <PropertyRef Name="lot_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_bet">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Lot" Type="Self.Lot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Lot">
+              <PropertyRef Name="user_bet_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_id">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="BetHistory" Type="Self.BetHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BetHistory">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_seller">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Lot" Type="Self.Lot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Lot">
+              <PropertyRef Name="user_seller_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="BetHistory" EntityType="Self.BetHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lot" EntityType="Self.Lot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LotProperty" EntityType="Self.LotProperty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInRole" EntityType="Self.UserInRole" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_bet_lot_id" Association="Self.FK_bet_lot_id">
+            <End Role="Lot" EntitySet="Lot" />
+            <End Role="BetHistory" EntitySet="BetHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_role" Association="Self.FK_id_role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserInRole" EntitySet="UserInRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_user" Association="Self.FK_id_user">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserInRole" EntitySet="UserInRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_lot_id" Association="Self.FK_lot_id">
+            <End Role="Lot" EntitySet="Lot" />
+            <End Role="LotProperty" EntitySet="LotProperty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_bet" Association="Self.FK_user_bet">
+            <End Role="User" EntitySet="User" />
+            <End Role="Lot" EntitySet="Lot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_id" Association="Self.FK_user_id">
+            <End Role="User" EntitySet="User" />
+            <End Role="BetHistory" EntitySet="BetHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_seller" Association="Self.FK_user_seller">
+            <End Role="User" EntitySet="User" />
+            <End Role="Lot" EntitySet="Lot" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BetHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lot_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="coast" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Lot" Relationship="Self.FK_bet_lot_id" FromRole="BetHistory" ToRole="Lot" />
+          <NavigationProperty Name="User" Relationship="Self.FK_user_id" FromRole="BetHistory" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Lot">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="user_seller_id" Type="Int32" />
+          <Property Name="primaryCoast" Type="Int32" Nullable="false" />
+          <Property Name="beginDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="endDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="isActive" Type="Int32" Nullable="false" />
+          <Property Name="currentCoast" Type="Int32" />
+          <Property Name="user_bet_id" Type="Int32" />
+          <NavigationProperty Name="BetHistories" Relationship="Self.FK_bet_lot_id" FromRole="Lot" ToRole="BetHistory" />
+          <NavigationProperty Name="LotProperties" Relationship="Self.FK_lot_id" FromRole="Lot" ToRole="LotProperty" />
+          <NavigationProperty Name="User" Relationship="Self.FK_user_bet" FromRole="Lot" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_user_seller" FromRole="Lot" ToRole="User" />
+        </EntityType>
+        <EntityType Name="LotProperty">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lot_id" Type="Int32" Nullable="false" />
+          <Property Name="property" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Lot" Relationship="Self.FK_lot_id" FromRole="LotProperty" ToRole="Lot" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="UserInRoles" Relationship="Self.FK_id_role" FromRole="Role" ToRole="UserInRole" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="money" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="BetHistories" Relationship="Self.FK_user_id" FromRole="User" ToRole="BetHistory" />
+          <NavigationProperty Name="Lots" Relationship="Self.FK_user_bet" FromRole="User" ToRole="Lot" />
+          <NavigationProperty Name="Lots1" Relationship="Self.FK_user_seller" FromRole="User" ToRole="Lot" />
+          <NavigationProperty Name="UserInRoles" Relationship="Self.FK_id_user" FromRole="User" ToRole="UserInRole" />
+        </EntityType>
+        <EntityType Name="UserInRole">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_id_role" FromRole="UserInRole" ToRole="Role" />
+          <NavigationProperty Name="User" Relationship="Self.FK_id_user" FromRole="UserInRole" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_bet_lot_id">
+          <End Role="Lot" Type="Self.Lot" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BetHistory" Type="Self.BetHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lot">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BetHistory">
+              <PropertyRef Name="lot_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_id">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="BetHistory" Type="Self.BetHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BetHistory">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_lot_id">
+          <End Role="Lot" Type="Self.Lot" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LotProperty" Type="Self.LotProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lot">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LotProperty">
+              <PropertyRef Name="lot_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_bet">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Lot" Type="Self.Lot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Lot">
+              <PropertyRef Name="user_bet_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_seller">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Lot" Type="Self.Lot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Lot">
+              <PropertyRef Name="user_seller_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserInRole" Type="Self.UserInRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserInRole">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_user">
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserInRole" Type="Self.UserInRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserInRole">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AuctionDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BetHistories" EntityType="Self.BetHistory" />
+          <EntitySet Name="Lots" EntityType="Self.Lot" />
+          <EntitySet Name="LotProperties" EntityType="Self.LotProperty" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserInRoles" EntityType="Self.UserInRole" />
+          <AssociationSet Name="FK_bet_lot_id" Association="Self.FK_bet_lot_id">
+            <End Role="Lot" EntitySet="Lots" />
+            <End Role="BetHistory" EntitySet="BetHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_id" Association="Self.FK_user_id">
+            <End Role="User" EntitySet="Users" />
+            <End Role="BetHistory" EntitySet="BetHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_lot_id" Association="Self.FK_lot_id">
+            <End Role="Lot" EntitySet="Lots" />
+            <End Role="LotProperty" EntitySet="LotProperties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_bet" Association="Self.FK_user_bet">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Lot" EntitySet="Lots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_seller" Association="Self.FK_user_seller">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Lot" EntitySet="Lots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_role" Association="Self.FK_id_role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="UserInRole" EntitySet="UserInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_user" Association="Self.FK_id_user">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserInRole" EntitySet="UserInRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="AuctionDbEntities">
+          <EntitySetMapping Name="BetHistories">
+            <EntityTypeMapping TypeName="Model.BetHistory">
+              <MappingFragment StoreEntitySet="BetHistory">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="lot_id" ColumnName="lot_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="coast" ColumnName="coast" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lots">
+            <EntityTypeMapping TypeName="Model.Lot">
+              <MappingFragment StoreEntitySet="Lot">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="user_seller_id" ColumnName="user_seller_id" />
+                <ScalarProperty Name="primaryCoast" ColumnName="primaryCoast" />
+                <ScalarProperty Name="beginDate" ColumnName="beginDate" />
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="currentCoast" ColumnName="currentCoast" />
+                <ScalarProperty Name="user_bet_id" ColumnName="user_bet_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LotProperties">
+            <EntityTypeMapping TypeName="Model.LotProperty">
+              <MappingFragment StoreEntitySet="LotProperty">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="lot_id" ColumnName="lot_id" />
+                <ScalarProperty Name="property" ColumnName="property" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="Model.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="role1" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Model.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="money" ColumnName="money" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInRoles">
+            <EntityTypeMapping TypeName="Model.UserInRole">
+              <MappingFragment StoreEntitySet="UserInRole">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
