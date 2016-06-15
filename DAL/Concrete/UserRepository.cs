@@ -48,5 +48,13 @@ namespace DAL.Concrete
                 })
                 .FirstOrDefault();
         }
+        public void Create(DalUser entity)
+        {
+            throw new NotImplementedException();
+        }
+        public void Update(DalUser entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
