@@ -12,26 +12,17 @@ namespace ORM
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Category
     {
-        public User()
+        public Category()
         {
-            this.BetHistories = new HashSet<BetHistory>();
             this.Lots = new HashSet<Lot>();
-            this.Lots1 = new HashSet<Lot>();
-            this.UserInRoles = new HashSet<UserInRole>();
-            this.webpages_Roles = new HashSet<webpages_Roles>();
         }
     
         public int id { get; set; }
-        public string login { get; set; }
-        public int money { get; set; }
-        public string email { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
     
-        public virtual ICollection<BetHistory> BetHistories { get; set; }
         public virtual ICollection<Lot> Lots { get; set; }
-        public virtual ICollection<Lot> Lots1 { get; set; }
-        public virtual ICollection<UserInRole> UserInRoles { get; set; }
-        public virtual ICollection<webpages_Roles> webpages_Roles { get; set; }
     }
 }

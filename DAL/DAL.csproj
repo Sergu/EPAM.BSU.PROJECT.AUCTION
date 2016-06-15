@@ -55,9 +55,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DAL.Interfaces\DAL.Interfaces.csproj">
+      <Project>{a1d82af3-bc16-4a2b-94df-762672c3e434}</Project>
+      <Name>DAL.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ORM\ORM.csproj">
       <Project>{e7f1fac7-9ed6-4d66-9acf-2b395f343916}</Project>
       <Name>ORM</Name>

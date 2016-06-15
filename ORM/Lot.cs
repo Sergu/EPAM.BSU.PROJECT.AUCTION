@@ -29,8 +29,10 @@ namespace ORM
         public int isActive { get; set; }
         public Nullable<int> currentCoast { get; set; }
         public Nullable<int> user_bet_id { get; set; }
+        public Nullable<int> category_id { get; set; }
     
         public virtual ICollection<BetHistory> BetHistories { get; set; }
+        public virtual Category Category { get; set; }
         public virtual ICollection<LotProperty> LotProperties { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }

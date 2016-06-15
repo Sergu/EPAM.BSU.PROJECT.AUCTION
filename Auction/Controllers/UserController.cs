@@ -6,22 +6,24 @@ using System.Web.Mvc;
 using Ninject;
 using BLL.interfaces.Services;
 using BLL.interfaces.Entities;
+using Auction.Models;
+using Auction.Infrastructure.Mappers;
 
 namespace Auction.Controllers
 {
-    public class DefaultController : Controller
+    public class UserController : Controller
     {
         private IUserService userService;
         //
         // GET: /Default/
-        public DefaultController(IUserService repository)
+        public UserController(IUserService repository)
         {
             this.userService = repository;
         }
 
-        public ActionResult Index()
-        {
-            List<UserEntity> entities = userService.GetAllUserEntities().ToList();
+        public ActionResult GetAllUsers()
+        {      
+            IEnumerable<UserViewModel> entities = userService.GetAllUserEntities().Select(u => u.ToMvcUser());
 
             int i = 1;
             return View();

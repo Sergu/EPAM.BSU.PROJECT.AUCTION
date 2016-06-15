@@ -15,6 +15,14 @@
           <Property Name="coast" Type="int" Nullable="false" />
           <Property Name="date" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="description" Type="ntext" Nullable="false" />
+        </EntityType>
         <EntityType Name="Lot">
           <Key>
             <PropertyRef Name="id" />
@@ -28,6 +36,7 @@
           <Property Name="isActive" Type="int" Nullable="false" />
           <Property Name="currentCoast" Type="int" />
           <Property Name="user_bet_id" Type="int" />
+          <Property Name="category_id" Type="int" />
         </EntityType>
         <EntityType Name="LotProperty">
           <Key>
@@ -62,6 +71,46 @@
           <Property Name="role_id" Type="int" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ConfirmationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsConfirmed" Type="bit" />
+          <Property Name="LastPasswordFailureDate" Type="datetime" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PasswordChangedDate" Type="datetime" />
+          <Property Name="PasswordSalt" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PasswordVerificationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="webpages_OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Name="Provider" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ProviderUserId" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_UsersInRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
         <Association Name="FK_bet_lot_id">
           <End Role="Lot" Type="Self.Lot" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -73,6 +122,18 @@
             </Principal>
             <Dependent Role="BetHistory">
               <PropertyRef Name="lot_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Lot" Type="Self.Lot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Lot">
+              <PropertyRef Name="category_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -118,6 +179,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_RoleId">
+          <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="webpages_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_user_bet">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Lot" Type="Self.Lot" Multiplicity="*" />
@@ -154,16 +227,37 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_UserId">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище ModelContainer">
           <EntitySet Name="BetHistory" EntityType="Self.BetHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Lot" EntityType="Self.Lot" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LotProperty" EntityType="Self.LotProperty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInRole" EntityType="Self.UserInRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_UsersInRoles" EntityType="Self.webpages_UsersInRoles" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_bet_lot_id" Association="Self.FK_bet_lot_id">
             <End Role="Lot" EntitySet="Lot" />
             <End Role="BetHistory" EntitySet="BetHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_category" Association="Self.FK_category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Lot" EntitySet="Lot" />
           </AssociationSet>
           <AssociationSet Name="FK_id_role" Association="Self.FK_id_role">
             <End Role="Role" EntitySet="Role" />
@@ -177,6 +271,10 @@
             <End Role="Lot" EntitySet="Lot" />
             <End Role="LotProperty" EntitySet="LotProperty" />
           </AssociationSet>
+          <AssociationSet Name="fk_RoleId" Association="Self.fk_RoleId">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
           <AssociationSet Name="FK_user_bet" Association="Self.FK_user_bet">
             <End Role="User" EntitySet="User" />
             <End Role="Lot" EntitySet="Lot" />
@@ -188,6 +286,10 @@
           <AssociationSet Name="FK_user_seller" Association="Self.FK_user_seller">
             <End Role="User" EntitySet="User" />
             <End Role="Lot" EntitySet="Lot" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserId" Association="Self.fk_UserId">
+            <End Role="User" EntitySet="User" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -207,6 +309,15 @@
           <NavigationProperty Name="Lot" Relationship="Self.FK_bet_lot_id" FromRole="BetHistory" ToRole="Lot" />
           <NavigationProperty Name="User" Relationship="Self.FK_user_id" FromRole="BetHistory" ToRole="User" />
         </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Lots" Relationship="Self.FK_category" FromRole="Category" ToRole="Lot" />
+        </EntityType>
         <EntityType Name="Lot">
           <Key>
             <PropertyRef Name="id" />
@@ -220,7 +331,9 @@
           <Property Name="isActive" Type="Int32" Nullable="false" />
           <Property Name="currentCoast" Type="Int32" />
           <Property Name="user_bet_id" Type="Int32" />
+          <Property Name="category_id" Type="Int32" />
           <NavigationProperty Name="BetHistories" Relationship="Self.FK_bet_lot_id" FromRole="Lot" ToRole="BetHistory" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_category" FromRole="Lot" ToRole="Category" />
           <NavigationProperty Name="LotProperties" Relationship="Self.FK_lot_id" FromRole="Lot" ToRole="LotProperty" />
           <NavigationProperty Name="User" Relationship="Self.FK_user_bet" FromRole="Lot" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="Self.FK_user_seller" FromRole="Lot" ToRole="User" />
@@ -255,6 +368,7 @@
           <NavigationProperty Name="Lots" Relationship="Self.FK_user_bet" FromRole="User" ToRole="Lot" />
           <NavigationProperty Name="Lots1" Relationship="Self.FK_user_seller" FromRole="User" ToRole="Lot" />
           <NavigationProperty Name="UserInRoles" Relationship="Self.FK_id_user" FromRole="User" ToRole="UserInRole" />
+          <NavigationProperty Name="webpages_Roles" Relationship="Self.webpages_UsersInRoles" FromRole="User" ToRole="webpages_Roles" />
         </EntityType>
         <EntityType Name="UserInRole">
           <Key>
@@ -265,6 +379,39 @@
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Role" Relationship="Self.FK_id_role" FromRole="UserInRole" ToRole="Role" />
           <NavigationProperty Name="User" Relationship="Self.FK_id_user" FromRole="UserInRole" ToRole="User" />
+        </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ConfirmationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsConfirmed" Type="Boolean" />
+          <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordSalt" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="webpages_OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Name="Provider" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderUserId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="User" />
         </EntityType>
         <Association Name="FK_bet_lot_id">
           <End Role="Lot" Type="Self.Lot" Multiplicity="1">
@@ -289,6 +436,18 @@
             </Principal>
             <Dependent Role="BetHistory">
               <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Lot" Type="Self.Lot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Lot">
+              <PropertyRef Name="category_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -358,13 +517,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="AuctionDbEntities" annotation:LazyLoadingEnabled="true">
+        <Association Name="webpages_UsersInRoles">
+          <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="NewConnection" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BetHistories" EntityType="Self.BetHistory" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Lots" EntityType="Self.Lot" />
           <EntitySet Name="LotProperties" EntityType="Self.LotProperty" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="UserInRoles" EntityType="Self.UserInRole" />
+          <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" />
+          <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" />
           <AssociationSet Name="FK_bet_lot_id" Association="Self.FK_bet_lot_id">
             <End Role="Lot" EntitySet="Lots" />
             <End Role="BetHistory" EntitySet="BetHistories" />
@@ -372,6 +539,10 @@
           <AssociationSet Name="FK_user_id" Association="Self.FK_user_id">
             <End Role="User" EntitySet="Users" />
             <End Role="BetHistory" EntitySet="BetHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_category" Association="Self.FK_category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Lot" EntitySet="Lots" />
           </AssociationSet>
           <AssociationSet Name="FK_lot_id" Association="Self.FK_lot_id">
             <End Role="Lot" EntitySet="Lots" />
@@ -393,13 +564,17 @@
             <End Role="User" EntitySet="Users" />
             <End Role="UserInRole" EntitySet="UserInRoles" />
           </AssociationSet>
+          <AssociationSet Name="webpages_UsersInRoles" Association="Self.webpages_UsersInRoles">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="AuctionDbEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="NewConnection">
           <EntitySetMapping Name="BetHistories">
             <EntityTypeMapping TypeName="Model.BetHistory">
               <MappingFragment StoreEntitySet="BetHistory">
@@ -408,6 +583,15 @@
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="coast" ColumnName="coast" />
                 <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="Model.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -423,6 +607,7 @@
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="currentCoast" ColumnName="currentCoast" />
                 <ScalarProperty Name="user_bet_id" ColumnName="user_bet_id" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -463,6 +648,48 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Membership">
+            <EntityTypeMapping TypeName="Model.webpages_Membership">
+              <MappingFragment StoreEntitySet="webpages_Membership">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
+                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
+                <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_OAuthMembership">
+            <EntityTypeMapping TypeName="Model.webpages_OAuthMembership">
+              <MappingFragment StoreEntitySet="webpages_OAuthMembership">
+                <ScalarProperty Name="Provider" ColumnName="Provider" />
+                <ScalarProperty Name="ProviderUserId" ColumnName="ProviderUserId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Roles">
+            <EntityTypeMapping TypeName="Model.webpages_Roles">
+              <MappingFragment StoreEntitySet="webpages_Roles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="webpages_UsersInRoles" TypeName="Model.webpages_UsersInRoles" StoreEntitySet="webpages_UsersInRoles">
+            <EndProperty Name="webpages_Roles">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="User">
+              <ScalarProperty Name="id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

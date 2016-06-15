@@ -66,6 +66,9 @@
     <Compile Include="BetHistory.cs">
       <DependentUpon>AuctDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Category.cs">
+      <DependentUpon>AuctDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Lot.cs">
       <DependentUpon>AuctDb.tt</DependentUpon>
     </Compile>
@@ -82,6 +85,15 @@
     <Compile Include="UserInRole.cs">
       <DependentUpon>AuctDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="webpages_Membership.cs">
+      <DependentUpon>AuctDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="webpages_OAuthMembership.cs">
+      <DependentUpon>AuctDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="webpages_Roles.cs">
+      <DependentUpon>AuctDb.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -95,6 +107,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="AuctDb.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>AuctDb.edmx</DependentUpon>
@@ -105,9 +120,6 @@
       <DependentUpon>AuctDb.edmx</DependentUpon>
       <LastGenOutput>AuctDb.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

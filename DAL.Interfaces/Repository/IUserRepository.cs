@@ -10,5 +10,6 @@ namespace DAL.Interfaces.Repository
     public interface IUserRepository : IRepository<DalUser>
     {
         DalUser GetByLogin(string login);
+        DalUser TEntity GetById(int key);
     }
 }

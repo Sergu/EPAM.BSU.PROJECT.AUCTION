@@ -26,10 +26,14 @@ namespace ORM
         }
     
         public virtual DbSet<BetHistory> BetHistories { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Lot> Lots { get; set; }
         public virtual DbSet<LotProperty> LotProperties { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserInRole> UserInRoles { get; set; }
+        public virtual DbSet<webpages_Membership> webpages_Membership { get; set; }
+        public virtual DbSet<webpages_OAuthMembership> webpages_OAuthMembership { get; set; }
+        public virtual DbSet<webpages_Roles> webpages_Roles { get; set; }
     }
 }

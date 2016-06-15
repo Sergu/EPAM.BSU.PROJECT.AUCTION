@@ -10,14 +10,14 @@ namespace DAL.Mappers
 {
     public static class DalEntityMapper
     {
-        public static DalUser ToDalUser(this User userORM)
+        public static DalUser ToDalUser(User userORM)
         {
             return new DalUser
             {
                 Id = userORM.id,
-                email = userORM.email,
+                Email = userORM.email,
                 Login = userORM.login,
-                money = userORM.money
+                Money = userORM.money
             };
         }
         public static User ToOrmUser(this DalUser dalUser)
@@ -26,8 +26,8 @@ namespace DAL.Mappers
             {
                 id = dalUser.Id,
                 login = dalUser.Login,
-                money = dalUser.money,
-                email = dalUser.email
+                money = dalUser.Money,
+                email = dalUser.Email
             };
         }
     }

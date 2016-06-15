@@ -16,8 +16,8 @@ namespace BLL.Mappers
             {
                 Id = userEntity.Id,
                 Login = userEntity.Login,
-                money = userEntity.money,
-                email = userEntity.email
+                Money = userEntity.Money,
+                Email = userEntity.Email
             };
         }
 
@@ -27,8 +27,8 @@ namespace BLL.Mappers
             {
                 Id = dalUser.Id,
                 Login = dalUser.Login,
-                money = dalUser.money,
-                email = dalUser.email
+                Money = dalUser.Money,
+                Email = dalUser.Email
             };
         }
     }

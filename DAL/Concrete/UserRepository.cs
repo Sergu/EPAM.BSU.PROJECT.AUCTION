@@ -23,18 +23,29 @@ namespace DAL.Concrete
         {
             return context.Set<User>()
                 .Where(user => user.id == id)
-                .Select(user => user)
-                .FirstOrDefault()
-                .ToDalUser();
+                .Select(user => DalEntityMapper.ToDalUser(user))
+                .FirstOrDefault();
         }
         public IEnumerable<DalUser> GetAll()
         {
-            return context.Set<User>().Select(user => user.ToDalUser());
+            IEnumerable<DalUser> col = context.Set<User>()
+                .Select(user => new DalUser() { 
+                    Id = user.id,
+                    Login = user.login,
+                    Money = user.money,
+                    Email = user.email                  
+                });
+            return col;
         }
         public DalUser GetByLogin(string login)
         {
             return context.Set<User>().Where(user => user.login == login)
-                .Select(user => user.ToDalUser())
+                .Select(user => new DalUser() {
+                    Id = user.id,
+                    Login = user.login,
+                    Money = user.money,
+                    Email = user.email
+                })
                 .FirstOrDefault();
         }
     }
