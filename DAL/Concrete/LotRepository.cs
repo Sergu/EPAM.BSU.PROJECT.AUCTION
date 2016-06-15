@@ -181,10 +181,26 @@ namespace DAL.Concrete
                     IsActive = lot.isActive
                 });
         }
+        public DalLot GetLotById(int id)
+        {
+            var lot = context.Set<Lot>().FirstOrDefault(l => l.id == id);
+            return new DalLot()
+            {
+                Id = lot.id,
+                Name = lot.name,
+                PrimaryCost = lot.primaryCoast,
+                BeginDate = lot.beginDate,
+                EndDate = lot.endDate,
+                UserSellerId = lot.user_seller_id,
+                UserBetId = lot.user_bet_id,
+                CurrentCost = lot.currentCoast,
+                CategoryId = lot.category_id,
+                IsActive = lot.isActive
+            };
+        }
         public void Create(DalLot entity)
         {
             var lot = new Lot(){
-                id = entity.Id,
                 name = entity.Name,
                 primaryCoast = entity.PrimaryCost,
                 beginDate = entity.BeginDate,

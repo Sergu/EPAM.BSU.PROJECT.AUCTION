@@ -18,5 +18,6 @@ namespace DAL.Interfaces.Repository
         IEnumerable<DalLot> GetUserBetActiveLots(int userBetId);
         IEnumerable<DalLot> GetUserBetBoughtLots(int userBetId);
         IEnumerable<DalLot> GetActiveLotsByCategory(int categoryId);
+        DalLot GetLotById(int id);
     }
 }
