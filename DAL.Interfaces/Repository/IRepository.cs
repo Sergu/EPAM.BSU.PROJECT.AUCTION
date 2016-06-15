@@ -13,7 +13,7 @@ namespace DAL.Interfaces.Repository
         //TEntity GetById(int key);
         //TEntity GetByPredicate(Expression<Func<TEntity, bool>> f);
         void Create(TEntity entity);
-        //void Delete(TEntity e);
         void Update(TEntity entity);
+        void Delete(int id);
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Interfaces.DTO
 {
-    public class DalLotProperty
+    public class DalLotProperty : IEntity
     {
         public int Id { get; set; }
         public int LotId { get; set; }
