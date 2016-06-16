@@ -15,9 +15,11 @@ namespace Auction.Controllers
         //
         // GET: /Lot/
         private IUserService userService;
-        public LotController(IUserService service)
+        private ILotService lotService;
+        public LotController(IUserService userService,ILotService lotService)
         {
-            this.userService = service;
+            this.userService = userService;
+            this.lotService = lotService;
         }
         public ActionResult Index()
         {
@@ -33,6 +35,9 @@ namespace Auction.Controllers
             string name = HttpContext.Profile.UserName;
             IIdentity identity = User.Identity;
             UserViewModel user = userService.GetUserByLogin(identity.Name).ToMvcUser();
+            IEnumerable<LotViewModel> lots = lotService.GetUserBetActiveLots(user.Id)
+                                                            .Select(lot => lot.ToMvcLot());
+            
 
             return View();
         }

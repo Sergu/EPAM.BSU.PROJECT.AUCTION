@@ -37,6 +37,8 @@ namespace Auction.Infrastructure
 
             kernel.Bind<IUserService>().To<UserService>();
             kernel.Bind<IUserRepository>().To<UserRepository>();
+            kernel.Bind<ILotService>().To<LotService>();
+            kernel.Bind<ILotRepository>().To<LotRepository>();
         }
     }
 }
