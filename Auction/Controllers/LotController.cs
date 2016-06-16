@@ -37,6 +37,7 @@ namespace Auction.Controllers
             UserViewModel user = userService.GetUserByLogin(identity.Name).ToMvcUser();
             IEnumerable<LotViewModel> lots = lotService.GetUserBetActiveLots(user.Id)
                                                             .Select(lot => lot.ToMvcLot());
+
             return View(lots);
         }
         public ActionResult Create()
