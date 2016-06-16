@@ -41,8 +41,18 @@ namespace Auction.Controllers
 
             return View(lots);
         }
-        public ActionResult GetLot(int id)
+        public ActionResult Create()
         {
+            LotViewModel model = new LotViewModel
+            {
+                Name = "new lot",
+                UserSellerId = userService.GetUserByLogin(User.Identity.Name).ToMvcUser().Id,
+                PrimaryCost = 200,
+                IsActive = 1,
+                BeginDate = DateTime.Now,
+                EndDate = DateTime.Now,
+            };
+            lotService.CreateLot(model.ToBllLot());
 
             return View();
         }

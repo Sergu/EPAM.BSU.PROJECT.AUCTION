@@ -32,5 +32,10 @@ namespace BLL.Services
         {
             return lotRepository.GetUserBetActiveLots(userBetId).Select(lot => lot.ToBllLot());
         }
+        public void CreateLot(LotEntity entity)
+        {
+            lotRepository.Create(entity.ToDalLot());
+            uow.Commit();
+        }
     }
 }

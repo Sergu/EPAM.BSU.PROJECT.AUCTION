@@ -14,7 +14,7 @@ namespace DAL.Concrete
 
         public UnitOfWork(DbContext context)
         {
-            Context = context;
+            this.Context = context;
         }
 
         public void Commit()

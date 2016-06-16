@@ -8,6 +8,7 @@ using DAL.Interfaces.Repository;
 using DAL.Interfaces.DTO;
 using ORM;
 using DAL.Mappers;
+using ORM;
 
 namespace DAL.Concrete
 {
@@ -211,7 +212,14 @@ namespace DAL.Concrete
                 category_id = entity.CategoryId,
                 isActive = entity.IsActive
             };
+            //using (var cont = new AuctionDbEntities())
+            //{
+            //    cont.Lots.Add(lot);
+            //    cont.SaveChanges();
+            //}
             context.Set<Lot>().Add(lot);
+            //context.Entry(lot).State = EntityState.Added;
+            context.SaveChanges();
         }
         public void Delete(int id)
         {

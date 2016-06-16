@@ -12,5 +12,6 @@ namespace BLL.interfaces.Services
         IEnumerable<LotEntity> GetAllActiveLots();
         IEnumerable<LotEntity> GetActiveLotsByCategory(int categoryId);
         IEnumerable<LotEntity> GetUserBetActiveLots(int userBetId);
+        void CreateLot(LotEntity entity);
     }
 }
