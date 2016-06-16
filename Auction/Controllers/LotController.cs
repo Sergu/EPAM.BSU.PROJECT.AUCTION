@@ -39,7 +39,7 @@ namespace Auction.Controllers
                                                             .Select(lot => lot.ToMvcLot());
             
 
-            return View();
+            return View(lots);
         }
         public ActionResult GetLot(int id)
         {

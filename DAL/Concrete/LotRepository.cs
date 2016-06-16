@@ -219,7 +219,7 @@ namespace DAL.Concrete
 
             context.Set<Lot>().Remove(lot);            
         }
-        void Update(DalLot entity)
+        public void Update(DalLot entity)
         {
             var lot = context.Set<Lot>().FirstOrDefault(l => l.id == entity.Id);
             lot.name = entity.Name;

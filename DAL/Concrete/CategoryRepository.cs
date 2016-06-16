@@ -14,7 +14,6 @@ namespace DAL.Concrete
     public class CategoryRepository : ICategoryRepository
     {
         private readonly DbContext context;
-
         public CategoryRepository(DbContext uow)
         {
             this.context = uow;

@@ -7,7 +7,7 @@ using DAL.Interfaces.DTO;
 
 namespace DAL.Interfaces.Repository
 {
-    public class ICategoryRepository : IRepository<DalCategory>
+    public interface ICategoryRepository : IRepository<DalCategory>
     {
         IEnumerable<DalCategory> GetAll();
         DalCategory GetById(int id);

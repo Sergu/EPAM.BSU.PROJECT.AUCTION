@@ -1,0 +1,31 @@
+﻿@using Auction.Models
+@model IEnumerable<LotViewModel>
+
+@{
+    ViewBag.Title = "GetUserLot";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Active Lots : </h1>
+@if(Model.ToList().Count == 0){
+    <h2>There is no Active Lots</h2>
+}
+
+@foreach (var lot in Model)
+{
+    <dl>
+        <dt>Lot:</dt>
+        <dd>@lot.Name</dd>
+        <dt>Date Added:</dt>
+        <dd>@lot.BeginDate</dd>
+        <dt>End Date:</dt>
+        <dd>@lot.EndDate</dd>
+        @{var remain = lot.EndDate.Subtract(lot.BeginDate);}
+        <dt>Remain:</dt>
+        <dd>@remain.Days d @remain.Hours h @remain.Minutes min </dd>
+        <dt>Primary cost:</dt>
+        <dd>@lot.PrimaryCost</dd>
+        <dt>Current cost</dt>
+        <dd>@lot.CurrentCost</dd>
+    </dl>
+}
+<h2>GetUserLot</h2>
