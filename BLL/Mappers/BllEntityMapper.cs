@@ -20,7 +20,6 @@ namespace BLL.Mappers
                 Email = userEntity.Email
             };
         }
-
         public static UserEntity ToBllUser(this DalUser dalUser)
         {
             return new UserEntity()
@@ -79,6 +78,48 @@ namespace BLL.Mappers
                 Id = dalCategory.Id,
                 name = dalCategory.name,
                 description = dalCategory.description
+            };
+        }
+        public static LotPropertyEntity ToBllLotProperty(this DalLotProperty dalLotProp)
+        {
+            return new LotPropertyEntity()
+            {
+                Id = dalLotProp.Id,
+                Description = dalLotProp.Description,
+                LotId = dalLotProp.LotId,
+                Property = dalLotProp.Property
+            };
+        }
+        public static DalLotProperty ToDalLotProperty(this LotPropertyEntity lotPropertEntity)
+        {
+            return new DalLotProperty()
+            {
+                Id = lotPropertEntity.Id,
+                Description = lotPropertEntity.Description,
+                LotId = lotPropertEntity.LotId,
+                Property = lotPropertEntity.Property
+            };
+        }
+        public static DalBetHistory ToDalBetHistory(this BetHistoryEntity betEntity)
+        {
+            return new DalBetHistory()
+            {
+                Id = betEntity.Id,
+                LotId = betEntity.LotId,
+                date = betEntity.date,
+                Cost = betEntity.Cost,
+                UserId = betEntity.UserId
+            };
+        }
+        public static BetHistoryEntity ToBllBetHistory(this DalBetHistory dalBet)
+        {
+            return new BetHistoryEntity()
+            {
+                Id = dalBet.Id,
+                date = dalBet.date,
+                Cost = dalBet.Cost,
+                LotId = dalBet.LotId,
+                UserId = dalBet.UserId
             };
         }
     }

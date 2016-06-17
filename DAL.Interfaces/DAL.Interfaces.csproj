@@ -47,7 +47,9 @@
     <Compile Include="DTO\DalUser.cs" />
     <Compile Include="DTO\IEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IBetHistoryRepository.cs" />
     <Compile Include="Repository\ICategoryRepository.cs" />
+    <Compile Include="Repository\ILotPropertyRepository.cs" />
     <Compile Include="Repository\ILotRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\IUnitOfWork.cs" />
