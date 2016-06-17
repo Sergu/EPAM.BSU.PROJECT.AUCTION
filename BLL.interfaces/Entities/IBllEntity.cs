@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace BLL.interfaces.Entities
 {
-    public class CategoryEntity : IBllEntity
+    public interface IBllEntity
     {
-        public int Id { get; set; }
-        public string name { get; set; }
-        public string description { get; set; }
+        int Id { get; set; }
     }
 }

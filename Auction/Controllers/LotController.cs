@@ -51,7 +51,7 @@ namespace Auction.Controllers
                 BeginDate = DateTime.Now,
                 EndDate = DateTime.Now,
             };
-            lotService.CreateLot(model.ToBllLot());
+            lotService.Create(model.ToBllLot());
 
             return View();
         }

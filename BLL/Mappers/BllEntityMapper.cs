@@ -63,5 +63,23 @@ namespace BLL.Mappers
                 UserSellerId = lotEntity.UserSellerId
             };
         }
+        public static DalCategory ToDalCategory(this CategoryEntity categoryEntity)
+        {
+            return new DalCategory()
+            {
+                Id = categoryEntity.Id,
+                name = categoryEntity.name,
+                description = categoryEntity.description
+            };
+        }
+        public static CategoryEntity ToBllCategory(this DalCategory dalCategory)
+        {
+            return new CategoryEntity()
+            {
+                Id = dalCategory.Id,
+                name = dalCategory.name,
+                description = dalCategory.description
+            };
+        }
     }
 }

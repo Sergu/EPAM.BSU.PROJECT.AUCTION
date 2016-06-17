@@ -33,5 +33,17 @@ namespace BLL.Services
         {
             return userRepository.GetAll().Select(user => user.ToBllUser());
         }
+        public void Create(UserEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+        public void Update(UserEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

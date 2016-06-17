@@ -32,10 +32,18 @@ namespace BLL.Services
         {
             return lotRepository.GetUserBetActiveLots(userBetId).Select(lot => lot.ToBllLot());
         }
-        public void CreateLot(LotEntity entity)
+        public void Create(LotEntity entity)
         {
             lotRepository.Create(entity.ToDalLot());
             uow.Commit();
+        }
+        public void Update(LotEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

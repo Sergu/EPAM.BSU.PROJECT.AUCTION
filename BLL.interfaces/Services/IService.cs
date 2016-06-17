@@ -7,9 +7,10 @@ using BLL.interfaces.Entities;
 
 namespace BLL.interfaces.Services
 {
-    public interface ICategoryService : IService<CategoryEntity>
+    public interface IService<TEntity> where TEntity : IBllEntity
     {
-        IEnumerable<CategoryEntity> GetAll();
-        CategoryEntity GetById(int id);
+        void Create(TEntity entity);
+        void Update(TEntity entity);
+        void Delete(int id);
     }
 }

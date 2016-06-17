@@ -7,13 +7,10 @@ using BLL.interfaces.Entities;
 
 namespace BLL.interfaces.Services
 {
-    public interface IUserService
+    public interface IUserService : IService<UserEntity>
     {
         UserEntity GetUserEntity(int id);
         IEnumerable<UserEntity> GetAllUserEntities();
         UserEntity GetUserByLogin(string login);
-
-        //void CreateUser(UserEntity user);
-        //void DeleteUser(UserEntity user);  
     }
 }

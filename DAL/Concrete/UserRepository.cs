@@ -23,7 +23,12 @@ namespace DAL.Concrete
         {
             return context.Set<User>()
                 .Where(user => user.id == id)
-                .Select(user => DalEntityMapper.ToDalUser(user))
+                .Select(user => new DalUser() {
+                    Id = user.id,
+                    Login = user.login,
+                    Money = user.money,
+                    Email = user.email   
+                })
                 .FirstOrDefault();
         }
         public IEnumerable<DalUser> GetAll()

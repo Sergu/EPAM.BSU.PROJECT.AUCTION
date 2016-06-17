@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BLL.interfaces.Entities
 {
-    public class LotEntity
+    public class LotEntity : IBllEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

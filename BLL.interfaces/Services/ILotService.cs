@@ -7,11 +7,10 @@ using BLL.interfaces.Entities;
 
 namespace BLL.interfaces.Services
 {
-    public interface ILotService
+    public interface ILotService : IService<LotEntity>
     {
         IEnumerable<LotEntity> GetAllActiveLots();
         IEnumerable<LotEntity> GetActiveLotsByCategory(int categoryId);
         IEnumerable<LotEntity> GetUserBetActiveLots(int userBetId);
-        void CreateLot(LotEntity entity);
     }
 }
