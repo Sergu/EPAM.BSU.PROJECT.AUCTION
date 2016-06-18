@@ -23,6 +23,17 @@ namespace Auction
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
+
+            bundles.Add(new ScriptBundle("~/bundles/bootstrapjs").Include(
+                "~/Scripts/bootstrap.js"));
+
+            bundles.Add(new StyleBundle("~/Content/bootstrapcss").Include(
+                "~/Content/bootstrap.css",
+                //"~/Content/themes/base/*.css",
+                "~/Content/bootstrap-theme.css",
+                "~/Content/bootstrap-responsive.css"));
+
+
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(

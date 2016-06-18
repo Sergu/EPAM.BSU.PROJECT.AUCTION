@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = "GetUserLot";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 <h1>Active Lots : </h1>
 @if(Model.ToList().Count == 0){
@@ -12,6 +12,7 @@
 
 @foreach (var lot in Model)
 {
+    <div class="col-sm-5">
     <dl>
         <dt>Lot:</dt>
         <dd>@lot.Name</dd>
@@ -27,5 +28,6 @@
         <dt>Current cost</dt>
         <dd>@lot.CurrentCost</dd>
     </dl>
+    </div>
 }
 <h2>GetUserLot</h2>
