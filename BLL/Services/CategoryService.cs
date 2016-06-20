@@ -14,19 +14,35 @@ namespace BLL.Services
     {
         private readonly IUnitOfWork uow;
         private readonly ICategoryRepository categoryRepository;
+        private readonly ILotRepository lotRepository;
 
-        public CategoryService(IUnitOfWork uow, ICategoryRepository repository)
+        public CategoryService(IUnitOfWork uow, ICategoryRepository repository, ILotRepository lotRepository)
         {
             this.uow = uow;
             this.categoryRepository = repository;
+            this.lotRepository = lotRepository;
         }
+
         public IEnumerable<CategoryEntity> GetAll()
         {
-            return categoryRepository.GetAll().Select(cat => cat.ToBllCategory());
+            var categories = categoryRepository.GetAll().Select(cat => cat.ToBllCategory());
+            List<CategoryEntity> list = categories.ToList();
+
+            for(int i=0;i<list.Count();i++)
+            {
+                int activeLots = lotRepository.GetActiveLotsByCategory(list[i].Id).Count();
+                int soldLots = lotRepository.GetSoldLotsByCategory(list[i].Id).Count();
+                list[i].ActiveLotsCount  = activeLots;
+                list[i].SoldLotsCount = soldLots;
+            }
+            return (IEnumerable<CategoryEntity>)list;
         }
         public CategoryEntity GetById(int id)
         {
-            return categoryRepository.GetById(id).ToBllCategory();
+            var category = categoryRepository.GetById(id).ToBllCategory();
+            category.ActiveLotsCount = lotRepository.GetActiveLotsByCategory(id).Count();
+            category.SoldLotsCount = lotRepository.GetSoldLotsByCategory(id).Count();
+            return category;           
         }
         public void Create(CategoryEntity entity)
         {

@@ -11,6 +11,7 @@ namespace DAL.Interfaces.Repository
     {
         //IEnumerable<DalLot> GetAllLots();
         IEnumerable<DalLot> GetAllActiveLots();
+        IEnumerable<DalLot> GetAllSoldLots();
         IEnumerable<DalLot> GetUserSellerAllLots(int userSellerId);
         IEnumerable<DalLot> GetUserSellerActiveLots(int userSellerId);
         IEnumerable<DalLot> GetUserSellerSoldLots(int userSellerId);
@@ -18,6 +19,7 @@ namespace DAL.Interfaces.Repository
         IEnumerable<DalLot> GetUserBetActiveLots(int userBetId);
         IEnumerable<DalLot> GetUserBetBoughtLots(int userBetId);
         IEnumerable<DalLot> GetActiveLotsByCategory(int categoryId);
+        IEnumerable<DalLot> GetSoldLotsByCategory(int categoryId);
         DalLot GetLotById(int id);
     }
 }

@@ -24,13 +24,33 @@ namespace BLL.Services
         {
             return lotRepository.GetAllActiveLots().Select(lot => lot.ToBllLot());
         }
+        public IEnumerable<LotEntity> GetAllSoldLots()
+        {
+            return lotRepository.GetAllSoldLots().Select(lot => lot.ToBllLot());
+        }
         public IEnumerable<LotEntity> GetActiveLotsByCategory(int categoryId)
         {
             return lotRepository.GetActiveLotsByCategory(categoryId).Select(lot => lot.ToBllLot());
         }
+        public IEnumerable<LotEntity> GetSoldLotsByCategory(int categoryId)
+        {
+            return lotRepository.GetSoldLotsByCategory(categoryId).Select(lot => lot.ToBllLot());
+        }
         public IEnumerable<LotEntity> GetUserBetActiveLots(int userBetId)
         {
             return lotRepository.GetUserBetActiveLots(userBetId).Select(lot => lot.ToBllLot());
+        }
+        public IEnumerable<LotEntity> GetUserBetBoughtLots(int userBetId)
+        {
+            return lotRepository.GetUserBetBoughtLots(userBetId).Select(lot => lot.ToBllLot());
+        }
+        public IEnumerable<LotEntity> GetUserSellerSoldLots(int userSellerId)
+        {
+            return lotRepository.GetUserSellerSoldLots(userSellerId).Select(lot => lot.ToBllLot());
+        }
+        public IEnumerable<LotEntity> GetUserSellerActiveLots(int userSellerId)
+        {
+            return lotRepository.GetUserSellerActiveLots(userSellerId).Select(lot => lot.ToBllLot());
         }
         public void Create(LotEntity entity)
         {

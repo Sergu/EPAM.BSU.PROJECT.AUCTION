@@ -40,6 +40,7 @@ namespace Auction.Infrastructure
             kernel.Bind<ILotService>().To<LotService>();
             kernel.Bind<ILotRepository>().To<LotRepository>();
             kernel.Bind<ICategoryRepository>().To<CategoryRepository>();
+            kernel.Bind<ICategoryService>().To<CategoryService>();
         }
     }
 }

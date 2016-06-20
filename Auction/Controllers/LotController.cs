@@ -29,8 +29,10 @@ namespace Auction.Controllers
         {
             return View();
         }
+
+
         [Authorize]
-        public ActionResult GetUserLot()
+        public ActionResult GetUserActiveLots()
         {
             string name = HttpContext.Profile.UserName;
             IIdentity identity = User.Identity;
@@ -40,6 +42,65 @@ namespace Auction.Controllers
 
             return View(lots);
         }
+
+        [Authorize]
+        public ActionResult GetUserBougthLots()
+        {
+            return View();
+
+        }
+
+        public ActionResult ActiveIndex(int? category,string searchString)
+        {
+            //ViewBag.SearchString = searchString;
+            //ViewBag.Category = category;
+            //ViewBag.IsActive = true;
+            var param = new GuestParamModel() { Category = category,SearchString = searchString};
+
+            return View("GuestActiveLots",param);
+        }
+        public ActionResult SoldIndex(int? category,string searchString)
+        {
+            //ViewBag.Category = category;
+            //ViewBag.SearchString = searchString;
+            //ViewBag.Category = category;
+            var guestLotViewModel = new GuestParamModel(){Category = category,SearchString = searchString};
+            return View("GuestSoldLots",guestLotViewModel);
+        }
+
+        public ActionResult LotSearchActive(int? category, string searchString,int? page)
+        {
+            IEnumerable<LotViewModel> lots = null;
+            if (category == null)
+                lots = lotService.GetAllActiveLots().Select(lot => lot.ToMvcLot());
+            else
+                lots = lotService.GetActiveLotsByCategory(category.Value).Select(lot => lot.ToMvcLot());
+            if (searchString != null)
+            {
+                lots = lots.Where(lot => lot.Name.ToUpper().Contains(searchString.ToUpper()));
+            }
+            lots = lots.OrderBy(lot => lot.EndDate);
+
+            return PartialView("_LotViewPartial", lots);
+        }
+
+        public ActionResult LotSearchSold(int? category,string searchString,int? page)
+        {
+            IEnumerable<LotViewModel> lots = null;
+            if (category == null)
+                lots = lotService.GetAllSoldLots().Select(lot => lot.ToMvcLot());
+            else
+                lots = lotService.GetSoldLotsByCategory(category.Value).Select(lot => lot.ToMvcLot());
+            if (searchString != null)
+            {
+                lots = lots.Where(lot => lot.Name.ToUpper().Contains(searchString.ToUpper()));
+            }
+            lots = lots.OrderByDescending(lot => lot.EndDate);
+
+            return PartialView("_LotViewPartial", lots);
+        }
+
+
         public ActionResult Create()
         {
             LotViewModel model = new LotViewModel

@@ -67,8 +67,8 @@ namespace BLL.Mappers
             return new DalCategory()
             {
                 Id = categoryEntity.Id,
-                name = categoryEntity.name,
-                description = categoryEntity.description
+                name = categoryEntity.Name,
+                description = categoryEntity.Description
             };
         }
         public static CategoryEntity ToBllCategory(this DalCategory dalCategory)
@@ -76,8 +76,8 @@ namespace BLL.Mappers
             return new CategoryEntity()
             {
                 Id = dalCategory.Id,
-                name = dalCategory.name,
-                description = dalCategory.description
+                Name = dalCategory.name,
+                Description = dalCategory.description
             };
         }
         public static LotPropertyEntity ToBllLotProperty(this DalLotProperty dalLotProp)

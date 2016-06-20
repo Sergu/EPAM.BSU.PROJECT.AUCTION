@@ -56,6 +56,23 @@ namespace DAL.Concrete
                     IsActive = lot.isActive
                 });
         }
+        public IEnumerable<DalLot> GetAllSoldLots()
+        {
+            return context.Set<Lot>()
+                .Where(lot => lot.isActive == 0)
+                .Select(lot => new DalLot(){
+                    Id = lot.id,
+                    Name = lot.name,
+                    PrimaryCost = lot.primaryCoast,
+                    BeginDate = lot.beginDate,
+                    EndDate = lot.endDate,
+                    UserSellerId = lot.user_seller_id,
+                    UserBetId = lot.user_bet_id,
+                    CurrentCost = lot.currentCoast,
+                    CategoryId = lot.category_id,
+                    IsActive = lot.isActive
+                });
+        }
         public IEnumerable<DalLot> GetUserSellerAllLots(int userSellerId)
         {
             return context.Set<Lot>()
@@ -146,6 +163,25 @@ namespace DAL.Concrete
                     IsActive = lot.isActive
                 });
         }
+        public IEnumerable<DalLot> GetSoldLotsByCategory(int categoryId)
+        {
+            return context.Set<Lot>()
+                .Where(lot => ((lot.category_id == categoryId) && (lot.isActive == 0)))
+                .Select(lot => new DalLot()
+                {
+                    Id = lot.id,
+                    Name = lot.name,
+                    PrimaryCost = lot.primaryCoast,
+                    BeginDate = lot.beginDate,
+                    EndDate = lot.endDate,
+                    UserSellerId = lot.user_seller_id,
+                    UserBetId = lot.user_bet_id,
+                    CurrentCost = lot.currentCoast,
+                    CategoryId = lot.category_id,
+                    IsActive = lot.isActive
+                });
+                
+        }
         public IEnumerable<DalLot> GetUserBetActiveLots(int userBetId)
         {
             return context.Set<Lot>()
@@ -199,6 +235,7 @@ namespace DAL.Concrete
                 IsActive = lot.isActive
             };
         }
+
         public void Create(DalLot entity)
         {
             var lot = new Lot(){

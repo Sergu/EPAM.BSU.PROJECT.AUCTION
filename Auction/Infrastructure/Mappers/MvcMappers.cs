@@ -19,7 +19,6 @@ namespace Auction.Infrastructure.Mappers
                 Money = userEntity.Money
             };
         }
-
         public static UserEntity ToBllUser(this UserViewModel userViewModel)
         {
             return new UserEntity()
@@ -60,6 +59,27 @@ namespace Auction.Infrastructure.Mappers
                 PrimaryCost = lotViewModel.PrimaryCost,
                 UserBetId = lotViewModel.UserBetId,
                 UserSellerId = lotViewModel.UserSellerId
+            };
+        }
+        public static CategoryViewModel ToMvcCategory(this CategoryEntity category){
+            return new CategoryViewModel()
+            {
+                Id = category.Id,
+                Description = category.Description,
+                Name = category.Name,
+                ActiveLotsCount = category.ActiveLotsCount,
+                SoldLotsCount = category.SoldLotsCount
+            };
+        }
+        public static CategoryEntity ToBllCategory(this CategoryViewModel category)
+        {
+            return new CategoryEntity()
+            {
+                Id = category.Id,
+                Description = category.Description,
+                Name = category.Name,
+                ActiveLotsCount = category.ActiveLotsCount,
+                SoldLotsCount = category.SoldLotsCount
             };
         }
     }
