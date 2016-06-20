@@ -24,21 +24,22 @@
 else
 {
     <div class="dropdown navbar-right" style="margin-top:8px">
-        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="navLogin">
+        @Html.ActionLink("Login","Login", "Account");
+        @*<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="navLogin">
             <i class="fa fa-sign-in"> Login</i>
         </button>
         <div class="dropdown-menu" style="padding:17px;">
             <div id="formLogin" class="form" style="min-width:150px;">
                 <label>Login</label>
-                @Html.Partial("~/Views/Account/Login.cshtml", new ViewDataDictionary())
+                @Html.ActionLink("Login", "Account");
             </div>
             <br />
             <form>
                 <a href="#" title="Fast and free sign up!" id="btnNewUser" data-toggle="collapse" data-target="#formRegister">New User? Sign-up..</a>
             </form>
             <div id="formRegister" class="form collapse">
-                @*@Html.Partial("~/Views/Account/Register.cshtml", new ViewDataDictionary())*@
+                Html.Partial("~/Views/Account/Register.cshtml", new ViewDataDictionary())
             </div>
-        </div>
+        </div>*@
     </div>
 }

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Configuration;
+using PagedList;
+using PagedList.Mvc;
 using System.Security.Principal;
 using BLL.interfaces.Services;
 using Auction.Models;
@@ -16,10 +19,15 @@ namespace Auction.Controllers
         // GET: /Lot/
         private IUserService userService;
         private ILotService lotService;
+        private int pageSize;
         public LotController(IUserService userService,ILotService lotService)
         {
             this.userService = userService;
             this.lotService = lotService;
+            if (!int.TryParse(ConfigurationManager.AppSettings["pageSize"], out pageSize))
+            {
+                this.pageSize = 8;
+            }
         }
         public ActionResult Index()
         {
@@ -81,7 +89,12 @@ namespace Auction.Controllers
             }
             lots = lots.OrderBy(lot => lot.EndDate);
 
-            return PartialView("_LotViewPartial", lots);
+            int pageNumber = page ?? 1;
+            GuestPagerModel model = new GuestPagerModel { Lots = lots.ToPagedList(pageNumber, pageSize)
+                                                                    , SearchString = searchString
+                                                                    , Category = category };
+
+            return PartialView("_LotViewPartial", model);
         }
 
         public ActionResult LotSearchSold(int? category,string searchString,int? page)
@@ -97,7 +110,13 @@ namespace Auction.Controllers
             }
             lots = lots.OrderByDescending(lot => lot.EndDate);
 
-            return PartialView("_LotViewPartial", lots);
+            int pageNumber = page ?? 1;
+            GuestPagerModel model = new GuestPagerModel{Lots = lots.ToPagedList(pageNumber, pageSize)
+                                                                    ,SearchString = searchString
+                                                                    ,Category = category
+            };
+
+            return PartialView("_LotViewPartial", model);
         }
 
 

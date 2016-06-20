@@ -1,8 +1,10 @@
-﻿@using Auction.Models;
-@model IEnumerable<LotViewModel>
+﻿@using PagedList.Mvc;
+@using Auction.Models;
+@model GuestPagerModel
 
 <div id="searchResult" class="row-fluid">
-        @foreach (LotViewModel item in Model)
+    <div class="row-fluid">
+        @foreach (LotViewModel item in Model.Lots)
         {
             <div class="divider col-sm-6">
                 <div class="col-sm-5">
@@ -18,6 +20,12 @@
                 <a class="btn btn-default" href="#" role="button">View Details >></a>
             </div>
         }
+    </div>
+    Page @(Model.Lots.PageCount < Model.Lots.PageNumber ? 0 : Model.Lots.PageNumber) of @Model.Lots.PageCount
+    <div id="contentPager">
+        @Html.PagedListPager(Model.Lots, page => Url.Action("LotSearchActive","Lot", new {searchString = Model.SearchString, category = Model.Category ,page}),
+                                   PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "searchResult" }))
+    </div>
 </div>
 
 
