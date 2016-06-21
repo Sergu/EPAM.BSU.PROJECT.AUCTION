@@ -367,6 +367,11 @@
     <Content Include="Views\Category\_CategoryInfoPartialView.cshtml" />
     <Content Include="Views\Lot\Create.cshtml" />
     <Content Include="Views\Lot\_LotViewGuestSoldPartial.cshtml" />
+    <Content Include="Views\Lot\UserWantedLotsView.cshtml" />
+    <Content Include="Views\Lot\_LotsViewPartial.cshtml" />
+    <Content Include="Views\Lot\UserBoughtLostView.cshtml" />
+    <Content Include="Views\Lot\UserProposedActiveLotsView.cshtml" />
+    <Content Include="Views\Lot\UserProposedSoldLotsView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

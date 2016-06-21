@@ -2,11 +2,12 @@
 {
     <text>
         <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Your lots<span class="caret"></span></a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">User lots standings<span class="caret"></span></a>
             <ul class="dropdown-menu">
-                <li><a href="#">Wanted lots</a></li>
-                <li><a href="#">Bought lots</a></li>
-                <li><a href="#">Sold lots</a></li>
+                <li><a href="@Url.Action("UserWantedLots","Lot")">Wanted lots</a></li>
+                <li><a href="@Url.Action("UserBoughtLots", "Lot")">Bought lots</a></li>
+                <li><a href="@Url.Action("UserProposedActiveLots", "Lot")">Proposed Active lots</a></li>
+                <li><a href="@Url.Action("UserProposedSoldLots", "Lot")">Proposed Sold lots</a></li>
             </ul>
         </li>
         <li>

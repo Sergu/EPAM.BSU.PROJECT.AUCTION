@@ -31,33 +31,87 @@ namespace Auction.Controllers
                 this.pageSize = 8;
             }
         }
-        public ActionResult Index()
+        [Authorize]
+        public ActionResult UserWantedLots()
         {
-            return View();
+            return View("UserWantedLotsView");
         }
-        public ActionResult GetLots()
+        [Authorize]
+        public ActionResult UserBoughtLots()
         {
-            return View();
+            return View("UserBoughtLostView");
         }
-
+        public ActionResult UserProposedActiveLots()
+        {
+            return View("UserProposedActiveLotsView");
+        }
+        public ActionResult UserProposedSoldLots()
+        {
+            return View("UserProposedSoldLotsView");
+        }
 
         [Authorize]
-        public ActionResult GetUserActiveLots()
+        public ActionResult GetUserActiveLots(int? page)
         {
-            string name = HttpContext.Profile.UserName;
             IIdentity identity = User.Identity;
             UserViewModel user = userService.GetUserByLogin(identity.Name).ToMvcUser();
             IEnumerable<LotViewModel> lots = lotService.GetUserBetActiveLots(user.Id)
                                                             .Select(lot => lot.ToMvcLot());
+            int pageNumber = page ?? 1;
+            var model = new GuestPagerModel
+            {
+                Lots = lots.ToPagedList(pageNumber,pageSize),
+                LotsGettingAction = "GetUserActiveLots"
+            };
 
-            return View(lots);
+            return PartialView("_LotsViewPartial",model);
         }
 
         [Authorize]
-        public ActionResult GetUserBougthLots()
+        public ActionResult GetUserBougthLots(int? page)
         {
-            return View();
+            UserViewModel user = userService.GetUserByLogin(User.Identity.Name).ToMvcUser();
+            IEnumerable<LotViewModel> lots = lotService.GetUserBetBoughtLots(user.Id)
+                                                            .Select(lot => lot.ToMvcLot());
 
+            int pageNumber = page ?? 1;
+            var model = new GuestPagerModel
+            {
+                Lots = lots.ToPagedList(pageNumber, pageSize),
+                LotsGettingAction = "GetUserBougthLots"
+            };
+
+            return PartialView("_LotsViewPartial", model);
+        }
+        [Authorize]
+        public ActionResult GetUserProposedActiveLots(int? page)
+        {
+            UserViewModel user = userService.GetUserByLogin(User.Identity.Name).ToMvcUser();
+            var lots = lotService.GetUserSellerActiveLots(user.Id).Select(lot => lot.ToMvcLot());
+
+            int pageNumber = page ?? 1;
+            var model = new GuestPagerModel
+            {
+                Lots = lots.ToPagedList(pageNumber, pageSize),
+                LotsGettingAction = "GetUserProposedActiveLots"
+            };
+
+            return PartialView("_LotsViewPartial", model);
+        }
+        [Authorize]
+        public ActionResult GetUserProposedSoldLots(int? page)
+        {
+            UserViewModel user = userService.GetUserByLogin(User.Identity.Name).ToMvcUser();
+            IEnumerable<LotViewModel> lots = lotService.GetUserSellerSoldLots(user.Id).Select(lot => lot.ToMvcLot());
+
+            int pageNumber = page ?? 1;
+            var model = new GuestPagerModel
+            {
+                Lots = lots.ToPagedList(pageNumber, pageSize),
+                LotsGettingAction = "GetUserProposedSoldLots"
+            };
+
+            return PartialView("_LotsViewPartial", model);
         }
 
         public ActionResult ActiveIndex(int? category,string searchString)
@@ -125,16 +179,6 @@ namespace Auction.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            //LotViewModel model = new LotViewModel
-            //{
-            //    Name = "new lot",
-            //    UserSellerId = userService.GetUserByLogin(User.Identity.Name).ToMvcUser().Id,
-            //    PrimaryCost = 200,
-            //    IsActive = 1,
-            //    BeginDate = DateTime.Now,
-            //    EndDate = DateTime.Now,
-            //};
-            //lotService.Create(model.ToBllLot());
             LotCreatingViewModel model = new LotCreatingViewModel();
             model.Categories = categoryService.GetCategoriesForLotCreation().Select(c => c.ToCategoryForLotModel());
             return View(model);
@@ -144,8 +188,7 @@ namespace Auction.Controllers
         [HttpPost]
         public ActionResult Create(LotCreatingViewModel model){
             if(ModelState.IsValid)
-            {
-                
+            {              
                 model.CurrentCost = model.PrimaryCost;
                 UserViewModel user = userService.GetUserByLogin(User.Identity.Name).ToMvcUser();
                 model.UserSellerId = user.Id;

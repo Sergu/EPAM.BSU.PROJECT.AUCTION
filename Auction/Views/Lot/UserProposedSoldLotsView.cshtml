@@ -1,0 +1,15 @@
+﻿<div class="container">
+    <div class="center-block col-sm-9">
+        <div class="jumbotron">
+            <h2>Proposed Sold lots</h2>
+            <p>
+                Contains lots that you proposed to buy to other users.
+                These lots were bought by someone or not sold at all
+            </p>
+        </div>
+        @Html.Action("GetUserProposedSoldLots", "Lot")
+    </div>
+</div>
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}

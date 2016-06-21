@@ -11,5 +11,6 @@ namespace Auction.Models
         public IPagedList<LotViewModel> Lots { get; set; }
         public int? Category { get; set; }
         public string SearchString { get; set; }
+        public string LotsGettingAction { get; set; }
     }
 }
