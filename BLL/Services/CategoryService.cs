@@ -22,6 +22,17 @@ namespace BLL.Services
             this.categoryRepository = repository;
             this.lotRepository = lotRepository;
         }
+        public IEnumerable<CategoryForLotCreationEntity> GetCategoriesForLotCreation()
+        {
+
+            var categories = categoryRepository.GetAll().Select(cat => cat.ToBllCategory().ToCategoryForLot()).ToList();
+            //var noneCategory = new CategoryForLotCreationEntity(){
+            //    Id = null,
+            //    CategoryName = "None"
+            //};
+            //categories.Add(noneCategory);
+            return categories;
+        }
 
         public IEnumerable<CategoryEntity> GetAll()
         {

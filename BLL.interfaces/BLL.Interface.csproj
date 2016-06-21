@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Entities\BetHistoryEntity.cs" />
     <Compile Include="Entities\CategoryEntity.cs" />
+    <Compile Include="Entities\CategoryForLotCreationEntity.cs" />
     <Compile Include="Entities\IBllEntity.cs" />
     <Compile Include="Entities\LotEntity.cs" />
     <Compile Include="Entities\LotPropertyEntity.cs" />

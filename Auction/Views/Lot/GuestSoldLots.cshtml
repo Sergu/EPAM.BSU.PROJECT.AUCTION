@@ -5,6 +5,7 @@
 
 <div class="container">
     <div class="jumbotron col-sm-3">
+        <h2>Categories</h2>
         @Html.Action("GetAllSoldCategories", "Category");
     </div>
     <div class="col-sm-9">
@@ -13,7 +14,7 @@
             @Html.Action("GetCategoryInfo", "Category", new { category = Model.Category })
         </div>
 
-        @using (Ajax.BeginForm("LotSearchSold", "Product", new AjaxOptions { UpdateTargetId = "searchResult" }))
+        @using (Ajax.BeginForm("LotSearchSold", "Lot", new { category = Model.Category }, new AjaxOptions { UpdateTargetId = "searchResult" }))
         {
             <div class="input-group" style="max-width:360px;">
                 @Html.TextBox("SearchString", null, new { @class = "form-control", @placeholder = "Search" })

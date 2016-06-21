@@ -82,5 +82,28 @@ namespace Auction.Infrastructure.Mappers
                 SoldLotsCount = category.SoldLotsCount
             };
         }
+        public static CategoryForLotCreationModel ToCategoryForLotModel(this CategoryForLotCreationEntity category)
+        {
+            return new CategoryForLotCreationModel()
+            {
+                Id = category.Id,
+                CategoryName = category.CategoryName
+            };
+        }
+        public static LotEntity ToBllLot(this LotCreatingViewModel lot){
+            return new LotEntity()
+            {
+                Id = lot.Id,
+                IsActive = lot.IsActive,
+                Name = lot.Name,
+                BeginDate = lot.BeginDate,
+                EndDate = lot.EndDate,
+                CategoryId = lot.CategoryId,
+                CurrentCost = lot.CurrentCost,
+                PrimaryCost = lot.PrimaryCost,
+                UserBetId = lot.UserBetId,
+                UserSellerId = lot.UserSellerId
+            };
+        }
     }
 }

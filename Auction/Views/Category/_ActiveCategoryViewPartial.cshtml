@@ -8,14 +8,28 @@
         {
             <button type="submit" class="list-group-item">All<span class="badge">@Model.Sum(m => m.ActiveLotsCount)</span></button>
         }*@
-        <a href="@Url.Action("ActiveIndex", "Lot")" class="list-group-item">All <span class="badge">@Model.Sum(cat => cat.ActiveLotsCount)</span></a>
+        <a href="@Url.Action("ActiveIndex", "Lot")" class="list-group-item">
+            <div>
+                All
+            </div>
+            <div>    
+                <span class="badge">@Model.Sum(cat => cat.ActiveLotsCount)</span>
+            </div>  
+        </a>
         @foreach (var cat in Model)
         {
             @*using (Ajax.BeginForm("LotSearchActive", "Lot", new { category = cat.Id}, new AjaxOptions { UpdateTargetId = "searchResult" }))
             {
                 <button type="submit" class="list-group-item">@cat.Name<span class="badge">@cat.ActiveLotsCount</span></button>
             }*@
-            <a href="@Url.Action("ActiveIndex", "Lot", new { category = cat.Id })" class="list-group-item">@cat.Name <span class="badge">@cat.ActiveLotsCount</span></a>
+            <a href="@Url.Action("ActiveIndex", "Lot", new { category = cat.Id })" class="list-group-item">
+                <div>
+                    @cat.Name
+                </div>    
+                <div>
+                    <span class="badge">@cat.ActiveLotsCount</span>
+                </div>
+            </a>
         }
     </div>
 

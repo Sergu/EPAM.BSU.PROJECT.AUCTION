@@ -3,26 +3,24 @@
 
 <div>
     <div class="list-group">
-        <a href="@Url.Action("SoldIndex", "Lot")" class="list-group-item">All <span class="badge">@Model.Sum(m => m.SoldLotsCount)</span></a>
+        <a href="@Url.Action("SoldIndex", "Lot")" class="list-group-item">
+            <div>
+                All
+            </div>
+            <div>
+                <span class="badge">@Model.Sum(m => m.SoldLotsCount)</span>
+            </div>
+        </a>
         @foreach (var cat in Model)
         {          
-            <a href="@Url.Action("SoldIndex", "Lot", new { category = cat.Id })" class="list-group-item">@cat.Name <span class="badge">@cat.SoldLotsCount</span></a>
+            <a href="@Url.Action("SoldIndex", "Lot", new { category = cat.Id })" class="list-group-item">
+                <div>
+                    @cat.Name
+                </div>
+                <div>
+                    <span class="badge">@cat.SoldLotsCount</span>
+                </div>
+            </a>
         }
     </div>
-
-    @*<ul>
-            <li>@Html.ActionLink("ALL", "ActiveIndex", "Lot", new { searchString = ViewBag.SearchString as string }, null)</li>
-            @foreach (var cat in Model)
-            {
-                bool flag = (bool)ViewBag.IsActive;
-                if (flag)
-                {
-                    <li>@Html.ActionLink(cat.name, "ActiveIndex", "Lot", new { category = cat.Id, searchString = ViewBag.SearchString as string },null)</li>
-                }
-                else
-                {
-                    <li>@Html.ActionLink(cat.name, "SoldIndex", "Lot", new { category = cat.Id, searchString = ViewBag.SearchString as string },null)</li>
-                }
-            }
-        </ul>*@
 </div>

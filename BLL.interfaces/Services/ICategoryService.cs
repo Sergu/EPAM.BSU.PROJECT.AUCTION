@@ -10,6 +10,7 @@ namespace BLL.interfaces.Services
     public interface ICategoryService : IService<CategoryEntity>
     {
         IEnumerable<CategoryEntity> GetAll();
+        IEnumerable<CategoryForLotCreationEntity> GetCategoriesForLotCreation();
         CategoryEntity GetById(int id);
     }
 }

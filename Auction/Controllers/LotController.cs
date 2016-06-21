@@ -19,11 +19,13 @@ namespace Auction.Controllers
         // GET: /Lot/
         private IUserService userService;
         private ILotService lotService;
+        private ICategoryService categoryService;
         private int pageSize;
-        public LotController(IUserService userService,ILotService lotService)
+        public LotController(IUserService userService,ILotService lotService, ICategoryService categoryService)
         {
             this.userService = userService;
             this.lotService = lotService;
+            this.categoryService = categoryService;
             if (!int.TryParse(ConfigurationManager.AppSettings["pageSize"], out pageSize))
             {
                 this.pageSize = 8;
@@ -94,7 +96,7 @@ namespace Auction.Controllers
                                                                     , SearchString = searchString
                                                                     , Category = category };
 
-            return PartialView("_LotViewPartial", model);
+            return PartialView("_LotViewGuestActivePartial", model);
         }
 
         public ActionResult LotSearchSold(int? category,string searchString,int? page)
@@ -116,24 +118,44 @@ namespace Auction.Controllers
                                                                     ,Category = category
             };
 
-            return PartialView("_LotViewPartial", model);
+            return PartialView("_LotViewGuestSoldPartial", model);
         }
 
-
+        [Authorize]
+        [HttpGet]
         public ActionResult Create()
         {
-            LotViewModel model = new LotViewModel
-            {
-                Name = "new lot",
-                UserSellerId = userService.GetUserByLogin(User.Identity.Name).ToMvcUser().Id,
-                PrimaryCost = 200,
-                IsActive = 1,
-                BeginDate = DateTime.Now,
-                EndDate = DateTime.Now,
-            };
-            lotService.Create(model.ToBllLot());
+            //LotViewModel model = new LotViewModel
+            //{
+            //    Name = "new lot",
+            //    UserSellerId = userService.GetUserByLogin(User.Identity.Name).ToMvcUser().Id,
+            //    PrimaryCost = 200,
+            //    IsActive = 1,
+            //    BeginDate = DateTime.Now,
+            //    EndDate = DateTime.Now,
+            //};
+            //lotService.Create(model.ToBllLot());
+            LotCreatingViewModel model = new LotCreatingViewModel();
+            model.Categories = categoryService.GetCategoriesForLotCreation().Select(c => c.ToCategoryForLotModel());
+            return View(model);
+        }
 
-            return View();
+        [Authorize]
+        [HttpPost]
+        public ActionResult Create(LotCreatingViewModel model){
+            if(ModelState.IsValid)
+            {
+                
+                model.CurrentCost = model.PrimaryCost;
+                UserViewModel user = userService.GetUserByLogin(User.Identity.Name).ToMvcUser();
+                model.UserSellerId = user.Id;
+                model.IsActive = 1;
+                model.BeginDate = DateTime.Now;
+                lotService.Create(model.ToBllLot());
+                return RedirectToAction("ActiveIndex");
+            }
+            model.Categories = categoryService.GetCategoriesForLotCreation().Select(c => c.ToCategoryForLotModel());
+            return View(model);
         }
 
     }

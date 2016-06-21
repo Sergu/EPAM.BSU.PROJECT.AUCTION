@@ -122,5 +122,13 @@ namespace BLL.Mappers
                 UserId = dalBet.UserId
             };
         }
+        public static CategoryForLotCreationEntity ToCategoryForLot(this CategoryEntity category)
+        {
+            return new CategoryForLotCreationEntity()
+            {
+                Id = category.Id,
+                CategoryName = category.Name
+            };
+        } 
     }
 }
