@@ -9,7 +9,7 @@ namespace BLL.interfaces.Services
 {
     public interface IUserService : IService<UserEntity>
     {
-        UserEntity GetUserEntity(int id);
+        UserEntity GetUserById(int id);
         IEnumerable<UserEntity> GetAllUserEntities();
         UserEntity GetUserByLogin(string login);
     }

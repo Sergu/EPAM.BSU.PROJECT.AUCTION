@@ -23,8 +23,7 @@ namespace Auction
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap-datetimejs").Include(
-                "~/Scripts/bootstrap-datetimepicker.min.js"));
+
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrapjs").Include(
                 "~/Scripts/bootstrap.js"));
@@ -34,9 +33,6 @@ namespace Auction
                 //"~/Content/themes/base/*.css",
                 "~/Content/bootstrap-theme.css",
                 "~/Content/bootstrap-responsive.css"));
-
-            bundles.Add(new StyleBundle("~/Content/bootstrap-datetimecss").Include(
-                "~/Content/bootstrap-datetimepicker.min.css"));
 
 
 

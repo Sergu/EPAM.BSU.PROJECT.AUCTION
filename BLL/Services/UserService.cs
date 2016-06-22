@@ -21,7 +21,7 @@ namespace BLL.Services
             this.userRepository = repository;
         }
 
-        public UserEntity GetUserEntity(int id)
+        public UserEntity GetUserById(int id)
         {
             return userRepository.GetById(id).ToBllUser();
         }
@@ -35,15 +35,18 @@ namespace BLL.Services
         }
         public void Create(UserEntity entity)
         {
-            throw new NotImplementedException();
+            userRepository.Create(entity.ToDalUser());
+            uow.Commit();
         }
         public void Update(UserEntity entity)
         {
-            throw new NotImplementedException();
+            userRepository.Update(entity.ToDalUser());
+            uow.Commit();
         }
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            userRepository.Delete(id);
+            uow.Commit();
         }
     }
 }

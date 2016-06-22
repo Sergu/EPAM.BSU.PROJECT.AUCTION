@@ -30,10 +30,15 @@ namespace Auction.Infrastructure
         {
             return kernel.GetAll(serviceType);
         }
+        public object GetInstanse<T>()
+        {
+            return kernel.TryGet<T>();
+        }
         private void AddBindings()
         {
             kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InRequestScope();
             kernel.Bind<DbContext>().To<AuctionDbEntities>().InRequestScope();
+            kernel.Bind<ILotMonitoringService>().To<LotMonitoringService>().InSingletonScope();
 
             kernel.Bind<IUserService>().To<UserService>();
             kernel.Bind<IUserRepository>().To<UserRepository>();

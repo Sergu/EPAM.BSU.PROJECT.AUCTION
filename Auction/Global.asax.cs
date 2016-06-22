@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Auction.Infrastructure;
+using BLL.interfaces.Services;
 
 namespace Auction
 {
@@ -24,7 +25,9 @@ namespace Auction
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
-            DependencyResolver.SetResolver(new NinjectDependencyResolver());
+            NinjectDependencyResolver dependencyResolver = new NinjectDependencyResolver();
+            DependencyResolver.SetResolver(dependencyResolver);
+            dependencyResolver.GetInstanse<ILotMonitoringService>();
         }
     }
 }

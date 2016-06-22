@@ -52,6 +52,7 @@ namespace DAL.Concrete
             category.name = entity.name;
             category.description = entity.description;
             context.Entry(category).State = EntityState.Modified;
+            context.SaveChanges();
         }
         public void Delete(int id)
         {

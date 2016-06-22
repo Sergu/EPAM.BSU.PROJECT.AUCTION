@@ -249,20 +249,16 @@ namespace DAL.Concrete
                 category_id = entity.CategoryId,
                 isActive = entity.IsActive
             };
-            //using (var cont = new AuctionDbEntities())
-            //{
-            //    cont.Lots.Add(lot);
-            //    cont.SaveChanges();
-            //}
             context.Set<Lot>().Add(lot);
-            //context.Entry(lot).State = EntityState.Added;
             context.SaveChanges();
+            //context.Dispose();
         }
         public void Delete(int id)
         {
             var lot = context.Set<Lot>().FirstOrDefault(l => l.id == id);
 
-            context.Set<Lot>().Remove(lot);            
+            context.Set<Lot>().Remove(lot);
+            context.SaveChanges();
         }
         public void Update(DalLot entity)
         {
@@ -277,6 +273,7 @@ namespace DAL.Concrete
             lot.category_id = entity.CategoryId;
             lot.isActive = entity.IsActive;
             context.Entry(lot).State = EntityState.Modified;
+            context.SaveChanges();
         }
     }
 }

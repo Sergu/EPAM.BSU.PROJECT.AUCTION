@@ -50,6 +50,7 @@ namespace DAL.Concrete
             bet.lot_id = entity.LotId;
             bet.user_id = entity.UserId;
             context.Entry(bet).State = EntityState.Modified;
+            context.SaveChanges();
         }
         public void Delete(int id)
         {

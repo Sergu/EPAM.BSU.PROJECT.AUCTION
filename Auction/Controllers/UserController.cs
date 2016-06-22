@@ -25,7 +25,6 @@ namespace Auction.Controllers
         {      
             IEnumerable<UserViewModel> entities = userService.GetAllUserEntities().Select(u => u.ToMvcUser());
 
-            int i = 1;
             return View();
         }
 

@@ -8,6 +8,10 @@ namespace Auction.Controllers
 {
     public class HomeController : Controller
     {
+        public ActionResult Error()
+        {
+            return View("Error");
+        }
         public ActionResult Index()
         {
             return View();
@@ -15,7 +19,6 @@ namespace Auction.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your app description page.";
 
             return View();
         }

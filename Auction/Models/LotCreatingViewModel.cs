@@ -21,9 +21,12 @@ namespace Auction.Models
         public int PrimaryCost { get; set; }
         public DateTime BeginDate { get; set; }
 
-        [Required(ErrorMessage="Enter end Date in format dd.mm.yyyy hh:mm")]
-        [DisplayFormat(DataFormatString="{0:dd.mm.yy hh:mm}", ApplyFormatInEditMode = true)]
-        [DataType(DataType.DateTime)]
+
+        [Display(Name= "End Date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        //[Required(ErrorMessage="Enter end Date in format dd.mm.yyyy hh:mm")]
+        //[DisplayFormat(DataFormatString="{0:mm.dd.yy hh:mm}", ApplyFormatInEditMode = true)]
+        //[DataType(DataType.Date)]
         [CustomLotEndDateValidator]
         public DateTime EndDate { get; set; }
         public int IsActive { get; set; }

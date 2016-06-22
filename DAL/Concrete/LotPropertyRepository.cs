@@ -47,6 +47,7 @@ namespace DAL.Concrete
             property.property = entity.Property;
             property.description = entity.Description;
             context.Entry(property).State = EntityState.Modified;
+            context.SaveChanges();
         }
         public void Delete(int id)
         {

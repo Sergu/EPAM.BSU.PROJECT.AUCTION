@@ -56,14 +56,19 @@ namespace BLL.Services
         {
             lotRepository.Create(entity.ToDalLot());
             uow.Commit();
+            uow.Dispose();
         }
         public void Update(LotEntity entity)
         {
-            throw new NotImplementedException();
+            lotRepository.Update(entity.ToDalLot());
+            uow.Commit();
+            uow.Dispose();
         }
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            lotRepository.Delete(id);
+            uow.Commit();
+            uow.Dispose();
         }
     }
 }

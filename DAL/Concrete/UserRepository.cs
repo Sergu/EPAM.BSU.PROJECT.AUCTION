@@ -55,15 +55,26 @@ namespace DAL.Concrete
         }
         public void Create(DalUser entity)
         {
-            throw new NotImplementedException();
+            var user = new User
+            {
+                login = entity.Login,
+                money = entity.Money,
+                email = entity.Email
+            };
         }
         public void Update(DalUser entity)
         {
-            throw new NotImplementedException();
+            var user = context.Set<User>().FirstOrDefault(u => u.id == entity.Id);
+            user.login = entity.Login;
+            user.money = entity.Money;
+            user.email = entity.Email;
+            context.Entry(user).State = EntityState.Modified;
+            context.SaveChanges();
         }
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var user = context.Set<User>().FirstOrDefault(u => u.id == id);
+            context.Set<User>().Remove(user);
         }
     }
 }

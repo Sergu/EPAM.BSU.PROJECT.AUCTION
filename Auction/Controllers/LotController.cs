@@ -20,12 +20,14 @@ namespace Auction.Controllers
         private IUserService userService;
         private ILotService lotService;
         private ICategoryService categoryService;
+        private ILotMonitoringService lotMonitoringService;
         private int pageSize;
-        public LotController(IUserService userService,ILotService lotService, ICategoryService categoryService)
+        public LotController(IUserService userService,ILotService lotService, ICategoryService categoryService,ILotMonitoringService lotMonitoringService)
         {
             this.userService = userService;
             this.lotService = lotService;
             this.categoryService = categoryService;
+            this.lotMonitoringService = lotMonitoringService;
             if (!int.TryParse(ConfigurationManager.AppSettings["pageSize"], out pageSize))
             {
                 this.pageSize = 8;
@@ -195,6 +197,7 @@ namespace Auction.Controllers
                 model.IsActive = 1;
                 model.BeginDate = DateTime.Now;
                 lotService.Create(model.ToBllLot());
+                lotMonitoringService.ChangeTimer();
                 return RedirectToAction("ActiveIndex");
             }
             model.Categories = categoryService.GetCategoriesForLotCreation().Select(c => c.ToCategoryForLotModel());
