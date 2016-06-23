@@ -1,0 +1,50 @@
+﻿@using Auction.Models;
+@model UserPurchaseModel
+
+@{
+    ViewBag.Title = "Room";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="alert-info">
+    <h2>@User.Identity.Name room</h2>
+</div>
+<div class="jumbotron center-block">
+    <div class="row">
+        <div>
+            <label> @Model.userModel.Login</label>
+        </div>
+        <div class="col-sm-3">
+            <label> @Model.userModel.Money</label>
+        </div>
+        <div class="col-sm-9">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse1">Click to purchase money</a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse">
+                        @using (Html.BeginForm())
+                        {
+                            <fieldset>
+                                <div class="form-group center-block">
+                                    @Html.LabelFor(m => m.money)
+                                    @Html.TextBoxFor(m => m.money, new { @class = "form-control", @style = "max-width:360px;", @type = "number" })
+                                    @Html.ValidationMessageFor(model => model.money, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-default" value="Purchase" />
+                                </div>
+                            </fieldset>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <label> @Model.userModel.Email</label>
+        </div>
+    </div>
+</div>

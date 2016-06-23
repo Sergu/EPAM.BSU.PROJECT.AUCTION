@@ -11,7 +11,7 @@
             </ul>
         </li>
         <li>
-            <a class="disabled"><span class="glyphicon glyphicon-user"></span> @User.Identity.Name </a>
+            <a href="@Url.Action("Room","Account")" class="disabled"><span class="glyphicon glyphicon-user"></span> @User.Identity.Name </a>
         </li>
         <li style="margin-top:8px;">
             @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))

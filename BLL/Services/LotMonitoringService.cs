@@ -14,6 +14,7 @@ namespace BLL.Services
 {
     public class LotMonitoringService : ILotMonitoringService
     {
+        private const long defaultElapsedTime = 86400000;
         private ILotService lotService;
         private readonly IUserService userService;
         private readonly Timer timer;
@@ -35,12 +36,12 @@ namespace BLL.Services
             long elapsedTime;
             var lot = lotService.GetAllActiveLots().OrderBy(l => l.EndDate).FirstOrDefault();
             var remain = lot.EndDate.Subtract(DateTime.Now);
-            if (remain.TotalMilliseconds < 86400000)
+            if (remain.TotalMilliseconds < defaultElapsedTime)
             {
                 elapsedTime = (long)remain.TotalMilliseconds;
             }
             else
-                elapsedTime = 86400000;
+                elapsedTime = defaultElapsedTime;
             timer.Interval = elapsedTime;
             timer.Elapsed += TrackingOverdueActiveLots;
             timer.AutoReset = false;

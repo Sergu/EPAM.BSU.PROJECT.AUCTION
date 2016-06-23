@@ -10,6 +10,10 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using Auction.Filters;
 using Auction.Models;
+using System.Security.Principal;
+using BLL.interfaces.Services;
+using Auction.Models;
+using Auction.Infrastructure.Mappers;
 
 namespace Auction.Controllers
 {
@@ -17,9 +21,40 @@ namespace Auction.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        private IUserService userService;
+        private IPaymentServiceProvider paymentService;
+        
+        public AccountController(IUserService userService,IPaymentServiceProvider paymentService)
+        {
+            this.userService = userService;
+            this.paymentService = paymentService;
+        }
+
+        [HttpGet]
+        public ActionResult Room()
+        {
+            var user = userService.GetUserByLogin(User.Identity.Name).ToMvcUser();
+            var model = new UserPurchaseModel
+            {
+                userModel = user
+            };
+            return View("Room", model);
+        }
+        [HttpPost]
+        public ActionResult Room(UserPurchaseModel model)
+        {
+            var user = userService.GetUserByLogin(User.Identity.Name);
+            if (ModelState.IsValid)
+            {
+                paymentService.PurchaseMoney(user,model.money);
+                return RedirectToAction("Room","Account");
+            }
+            model.money = 0;
+            model.userModel = user.ToMvcUser();
+            return View("Room", model);
+        }
         //
         // GET: /Account/Login
-        [Authorize]
         public ActionResult Smth()
         {
             return View();

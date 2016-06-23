@@ -20,13 +20,14 @@ namespace Auction.Validators
                 }
                 else
                 {
-                    //return new ValidationResult("Lot can't be exposed for more than two years and his torg duration should be more than 1 month  ");
-                    return new ValidationResult("Lot can't be exposed for more than two years");
+                    if (date < DateTime.Now)
+                        return new ValidationResult("End Date should be more than current time. Date format yyyy:mm:dd hh:mm:{ss}");
+                    return new ValidationResult("Lot can't be sold for more than two years. Date format yyyy:mm:dd hh:mm:{ss}");
                 }
             }
             else
             {
-                return new ValidationResult("Incorrect date format");
+                return new ValidationResult("Incorrect date format required: yyyy:mm:dd hh:mm:{ss}");
             }
         }
     }

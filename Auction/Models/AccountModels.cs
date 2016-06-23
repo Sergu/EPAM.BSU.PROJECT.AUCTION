@@ -89,7 +89,7 @@ namespace Auction.Models
         [Compare("Password", ErrorMessage = "Пароль и его подтверждение не совпадают.")]
         public string ConfirmPassword { get; set; }
         [Required]
-        [Display(Name="eMAIL")]
+        [Display(Name="Email")]
         public string email { get; set; }
     }
 
