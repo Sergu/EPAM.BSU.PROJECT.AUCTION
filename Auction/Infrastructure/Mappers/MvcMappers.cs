@@ -29,38 +29,38 @@ namespace Auction.Infrastructure.Mappers
                 Email = userViewModel.Email
             };
         }
-        public static LotViewModel ToMvcLot(this LotEntity lotEntity)
-        {
-            return new LotViewModel()
-            {
-                Id = lotEntity.Id,
-                IsActive = lotEntity.IsActive,
-                Name = lotEntity.Name,
-                BeginDate = lotEntity.BeginDate,
-                EndDate = lotEntity.EndDate,
-                CategoryId = lotEntity.CategoryId,
-                CurrentCost = lotEntity.CurrentCost,
-                PrimaryCost = lotEntity.PrimaryCost,
-                UserBetId = lotEntity.UserBetId,
-                UserSellerId = lotEntity.UserSellerId
-            };
-        }
-        public static LotEntity ToBllLot(this LotViewModel lotViewModel)
-        {
-            return new LotEntity()
-            {
-                Id = lotViewModel.Id,
-                IsActive = lotViewModel.IsActive,
-                Name = lotViewModel.Name,
-                BeginDate = lotViewModel.BeginDate,
-                EndDate = lotViewModel.EndDate,
-                CategoryId = lotViewModel.CategoryId,
-                CurrentCost = lotViewModel.CurrentCost,
-                PrimaryCost = lotViewModel.PrimaryCost,
-                UserBetId = lotViewModel.UserBetId,
-                UserSellerId = lotViewModel.UserSellerId
-            };
-        }
+        //public static LotViewModel ToMvcLot(this LotEntity lotEntity)
+        //{
+        //    return new LotViewModel()
+        //    {
+        //        Id = lotEntity.Id,
+        //        IsActive = lotEntity.IsActive,
+        //        Name = lotEntity.Name,
+        //        BeginDate = lotEntity.BeginDate,
+        //        EndDate = lotEntity.EndDate,
+        //        CategoryId = lotEntity.CategoryId,
+        //        CurrentCost = lotEntity.CurrentCost,
+        //        PrimaryCost = lotEntity.PrimaryCost,
+        //        UserBetId = lotEntity.UserBetId,
+        //        UserSellerId = lotEntity.UserSellerId
+        //    };
+        //}
+        //public static LotEntity ToBllLot(this LotViewModel lotViewModel)
+        //{
+        //    return new LotEntity()
+        //    {
+        //        Id = lotViewModel.Id,
+        //        IsActive = lotViewModel.IsActive,
+        //        Name = lotViewModel.Name,
+        //        BeginDate = lotViewModel.BeginDate,
+        //        EndDate = lotViewModel.EndDate,
+        //        CategoryId = lotViewModel.CategoryId,
+        //        CurrentCost = lotViewModel.CurrentCost,
+        //        PrimaryCost = lotViewModel.PrimaryCost,
+        //        UserBetId = lotViewModel.UserBetId,
+        //        UserSellerId = lotViewModel.UserSellerId
+        //    };
+        //}
         public static CategoryViewModel ToMvcCategory(this CategoryEntity category){
             return new CategoryViewModel()
             {

@@ -45,6 +45,7 @@ namespace DAL.Concrete
                 description = entity.description
             };
             context.Set<Category>().Add(category);
+            context.SaveChanges();
         }
         public void Update(DalCategory entity)
         {
@@ -59,6 +60,7 @@ namespace DAL.Concrete
             var category = context.Set<Category>().FirstOrDefault(cat => cat.id == id);
 
             context.Set<Category>().Remove(category);
+            context.SaveChanges();
         }
     }
 }

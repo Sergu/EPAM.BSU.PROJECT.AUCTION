@@ -52,6 +52,10 @@ namespace BLL.Services
         {
             return lotRepository.GetUserSellerActiveLots(userSellerId).Select(lot => lot.ToBllLot());
         }
+        public LotEntity GetLotById(int id)
+        {
+            return lotRepository.GetLotById(id).ToBllLot();
+        }
         public void Create(LotEntity entity)
         {
             lotRepository.Create(entity.ToDalLot());

@@ -12,7 +12,6 @@ using Auction.Filters;
 using Auction.Models;
 using System.Security.Principal;
 using BLL.interfaces.Services;
-using Auction.Models;
 using Auction.Infrastructure.Mappers;
 
 namespace Auction.Controllers

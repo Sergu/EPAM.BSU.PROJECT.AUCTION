@@ -20,15 +20,15 @@ namespace DAL.Concrete
         }
         public IEnumerable<DalBetHistory> GetBetsByLotId(int lotId)
         {
-            return context.Set<DalBetHistory>()
-                .Where(bet => bet.LotId == lotId)
+            return context.Set<BetHistory>()
+                .Where(bet => bet.lot_id == lotId)
                 .Select(bet => new DalBetHistory()
                 {
-                    Id = bet.Id,
+                    Id = bet.id,
                     date = bet.date,
-                    Cost = bet.Cost,
-                    LotId = bet.LotId,
-                    UserId = bet.UserId
+                    Cost = bet.coast,
+                    LotId = bet.lot_id,
+                    UserId = bet.user_id
                 });
         }
         public void Create(DalBetHistory entity)
@@ -41,6 +41,7 @@ namespace DAL.Concrete
                 user_id = entity.UserId
             };
             context.Set<BetHistory>().Add(bet);
+            context.SaveChanges();
         }
         public void Update(DalBetHistory entity)
         {
@@ -56,6 +57,7 @@ namespace DAL.Concrete
         {
             var bet = context.Set<BetHistory>().FirstOrDefault(b => b.id == id);
             context.Set<BetHistory>().Remove(bet);
+            context.SaveChanges();
         }
     }
 }

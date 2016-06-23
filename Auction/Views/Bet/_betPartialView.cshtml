@@ -1,0 +1,27 @@
+﻿@using Auction.Models
+@model IEnumerable<BetViewModel>
+
+<div id="betsSearchResult">
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>Bet</th>
+                <th>User</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{int i = 1;}
+            @foreach (var bet in Model)
+            {
+                <tr>
+                    <th>@i @{i++;}</th>
+                    <th>@bet.Cost</th>
+                    <th>@bet.UserName</th>
+                    <th>@bet.date</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

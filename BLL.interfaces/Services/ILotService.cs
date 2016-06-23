@@ -17,5 +17,6 @@ namespace BLL.interfaces.Services
         IEnumerable<LotEntity> GetUserBetBoughtLots(int userBetId);
         IEnumerable<LotEntity> GetUserSellerSoldLots(int userSellerId);
         IEnumerable<LotEntity> GetUserSellerActiveLots(int userSellerId);
+        LotEntity GetLotById(int id);
     }
 }

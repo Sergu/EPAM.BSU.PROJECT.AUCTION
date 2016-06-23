@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Mappers\BllEntityMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BetHistoryService.cs" />
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\LotMonitoringService.cs" />
     <Compile Include="Services\LotPropertyService.cs" />

@@ -1,6 +1,7 @@
 ﻿@if (Request.IsAuthenticated)
 {
     <text>
+        <li><a href="@Url.Action("Create","Lot")" class="disabled">Create Lot</a></li>
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">User lots standings<span class="caret"></span></a>
             <ul class="dropdown-menu">

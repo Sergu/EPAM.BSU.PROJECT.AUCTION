@@ -27,7 +27,7 @@ namespace Auction.Validators
             }
             else
             {
-                return new ValidationResult("Incorrect date format required: yyyy:mm:dd hh:mm:{ss}");
+                return new ValidationResult("Incorrect date format required: yyyy.mm.dd hh:mm:{ss}");
             }
         }
     }

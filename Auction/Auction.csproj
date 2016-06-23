@@ -198,6 +198,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BetController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -209,8 +210,10 @@
     <Compile Include="Infrastructure\Mappers\MvcMappers.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\BetViewModel.cs" />
     <Compile Include="Models\CategoryForLotCreationModel.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
+    <Compile Include="Models\DetailsLotModel.cs" />
     <Compile Include="Models\GuestPagerModel.cs" />
     <Compile Include="Models\GuestParamModel.cs" />
     <Compile Include="Models\LotCreatingViewModel.cs" />
@@ -218,6 +221,7 @@
     <Compile Include="Models\UserPurchaseModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validators\CustomLotBetValidator.cs" />
     <Compile Include="Validators\CustomLotEndDateValidator.cs" />
     <Compile Include="Validators\CustomPurchaseMoneyValidator.cs" />
   </ItemGroup>
@@ -375,6 +379,9 @@
     <Content Include="Views\Lot\UserProposedActiveLotsView.cshtml" />
     <Content Include="Views\Lot\UserProposedSoldLotsView.cshtml" />
     <Content Include="Views\Account\Room.cshtml" />
+    <Content Include="Views\Lot\Details.cshtml" />
+    <Content Include="Views\Bet\_betPartialView.cshtml" />
+    <Content Include="Views\Lot\View1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

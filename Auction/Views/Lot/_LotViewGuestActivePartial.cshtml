@@ -17,7 +17,7 @@
                     <h6>Prim Cost: @item.PrimaryCost</h6>
                     <h6>Cur Cost: @item.CurrentCost</h6>
                 </div>
-                <a class="btn btn-default" href="#" role="button">View Details >></a>
+                <a class="btn btn-default" href="@Url.Action("Details", "Lot", new { id = @item.Id})" role="button">View Details >></a>
             </div>
         }
     </div>

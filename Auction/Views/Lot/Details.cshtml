@@ -1,0 +1,108 @@
+﻿@using Auction.Models
+@model DetailsLotModel
+
+<div class="center-block">
+    <div class="jumbotron">
+        <h2>Lot№@Model.LotViewModel.Id Description</h2>
+    </div>
+    <div class="col-sm-6">
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <td>Name</td>
+                <td>@Model.LotViewModel.Name</td>
+            </tr>
+            <tr>
+                <td>Lot№</td>
+                <td>@Model.LotViewModel.Id</td>
+            </tr>
+            <tr>
+                <td>IsActive</td>
+                <td>@Model.LotViewModel.IsActive.ToString()</td>
+            </tr>
+            <tr>
+                <td>Primary cost</td>
+                <td>@Model.LotViewModel.PrimaryCost</td>
+            </tr>
+            <tr>
+                <td>Current cost</td>
+                <td>@Model.LotViewModel.CurrentCost</td>
+            </tr>
+            <tr>
+                <td>User seller Name</td>
+                <td>@Model.LotViewModel.UserSellerName</td>
+            </tr>
+            <tr>
+                <td>Bets</td>
+                <td><span class="badge">@Model.LotViewModel.betCount</span></td>
+            </tr>
+            <tr>
+                <td>Last bet user name</td>
+                <td>@Model.LotViewModel.UserBetName</td>
+            </tr>
+            <tr>
+                <td>Begin Date</td>
+                <td>@Model.LotViewModel.BeginDate</td>
+            </tr>
+            <tr>
+                <td>End Date</td>
+                <td>@Model.LotViewModel.EndDate</td>
+            </tr>
+            @if (Model.LotViewModel.IsActive)
+            { 
+                <tr>     
+                    @{var remain = Model.LotViewModel.EndDate.Subtract(DateTime.Now);}           
+                    <td>Time remain</td>
+                    <td>@remain.Days days @remain.Hours hours @remain.Minutes min @remain.Seconds sec </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+    @if (Request.IsAuthenticated)
+    { 
+    <div class="col-sm-6">
+        <div>
+            @if (Model.LotViewModel.IsActive)
+            {   
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse1">Click to make a bet</a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse">
+                        @using (Html.BeginForm("MakeBet", "Lot", new { lotId = Model.LotViewModel.Id}))
+                        {
+                            <fieldset>
+                                <div class="form-group center-block">
+                                    @Html.LabelFor(m => m.Money)
+                                    @Html.TextBoxFor(m => m.Money, new { @class = "form-control", @style = "max-width:360px;", @type = "number" })
+                                    @Html.ValidationMessageFor(model => model.Money, "", new { @class = "text-danger" })
+                                    @{Model.LotId = Model.LotViewModel.Id;}
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-default" value="Purchase" />
+                                </div>
+                            </fieldset>
+                        }
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+        <div>
+            @using (Ajax.BeginForm("LotBets", "Bet", new { lotId = Model.LotViewModel.Id }, new AjaxOptions { UpdateTargetId = "betsSearchResult" }))
+            {
+                <button type="submit" class="list-group-item">Bet History</button>
+            }
+            @Html.Action("LotBets", "Bet", new { lotId = Model.LotViewModel.Id});          
+        </div>
+    </div>
+    }
+</div>
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}

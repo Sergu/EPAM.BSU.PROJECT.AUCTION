@@ -8,7 +8,6 @@ using DAL.Interfaces.Repository;
 using DAL.Interfaces.DTO;
 using ORM;
 using DAL.Mappers;
-using ORM;
 
 namespace DAL.Concrete
 {

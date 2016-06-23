@@ -61,6 +61,8 @@ namespace DAL.Concrete
                 money = entity.Money,
                 email = entity.Email
             };
+            context.Set<User>().Add(user);
+            context.SaveChanges();
         }
         public void Update(DalUser entity)
         {

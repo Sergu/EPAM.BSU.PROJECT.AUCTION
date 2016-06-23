@@ -47,6 +47,8 @@ namespace Auction.Infrastructure
             kernel.Bind<ICategoryRepository>().To<CategoryRepository>();
             kernel.Bind<ICategoryService>().To<CategoryService>();
             kernel.Bind<IPaymentServiceProvider>().To<PaymentServiceProvider>();
+            kernel.Bind<IBetHistoryRepository>().To<BetHistoryRepository>();
+            kernel.Bind<IBetHistoryService>().To<BetHistoryService>();
         }
     }
 }
