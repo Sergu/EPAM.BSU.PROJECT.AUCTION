@@ -48,6 +48,8 @@
     <Compile Include="Services\LotPropertyService.cs" />
     <Compile Include="Services\LotService.cs" />
     <Compile Include="Services\PaymentServiceProvider.cs" />
+    <Compile Include="Services\RoleService.cs" />
+    <Compile Include="Services\UserInRoleService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>

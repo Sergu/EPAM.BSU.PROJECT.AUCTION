@@ -45,14 +45,18 @@
     <Compile Include="Entities\IBllEntity.cs" />
     <Compile Include="Entities\LotEntity.cs" />
     <Compile Include="Entities\LotPropertyEntity.cs" />
+    <Compile Include="Entities\RoleEntity.cs" />
     <Compile Include="Entities\UserEntity.cs" />
+    <Compile Include="Entities\UserInRoleEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IBetHistoryService.cs" />
     <Compile Include="Services\ICategoryService.cs" />
     <Compile Include="Services\ILotMonitoringService.cs" />
     <Compile Include="Services\ILotPropertyService.cs" />
     <Compile Include="Services\ILotService.cs" />
+    <Compile Include="Services\IRoleService.cs" />
     <Compile Include="Services\IService.cs" />
+    <Compile Include="Services\IUserInRoleService.cs" />
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\IPaymentServiceProvider.cs" />
   </ItemGroup>

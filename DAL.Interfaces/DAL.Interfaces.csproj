@@ -55,6 +55,7 @@
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\IRoleRepository.cs" />
     <Compile Include="Repository\IUnitOfWork.cs" />
+    <Compile Include="Repository\IUserInRoleRepository.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
   </ItemGroup>
   <ItemGroup />

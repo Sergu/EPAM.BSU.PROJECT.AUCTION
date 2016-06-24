@@ -54,6 +54,7 @@
     <Compile Include="Concrete\LotRepository.cs" />
     <Compile Include="Concrete\RoleRepository.cs" />
     <Compile Include="Concrete\UnitOfWork.cs" />
+    <Compile Include="Concrete\UserInRoleRepository.cs" />
     <Compile Include="Concrete\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
