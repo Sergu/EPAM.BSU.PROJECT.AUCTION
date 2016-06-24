@@ -45,6 +45,7 @@
     <Compile Include="DTO\DalLotProperty.cs" />
     <Compile Include="DTO\DalRole.cs" />
     <Compile Include="DTO\DalUser.cs" />
+    <Compile Include="DTO\DalUserInRole.cs" />
     <Compile Include="DTO\IEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IBetHistoryRepository.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Repository\ILotPropertyRepository.cs" />
     <Compile Include="Repository\ILotRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\IRoleRepository.cs" />
     <Compile Include="Repository\IUnitOfWork.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
   </ItemGroup>

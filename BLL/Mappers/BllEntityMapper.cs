@@ -129,6 +129,40 @@ namespace BLL.Mappers
                 Id = category.Id,
                 CategoryName = category.Name
             };
-        } 
+        }
+        public static RoleEntity ToBllRole(this DalRole dalRole)
+        {
+            return new RoleEntity
+            {
+                Id = dalRole.Id,
+                Name = dalRole.Name
+            };
+        }
+        public static DalRole ToDalRole(this RoleEntity roleEntity)
+        {
+            return new DalRole
+            {
+                Id = roleEntity.Id,
+                Name = roleEntity.Name
+            };
+        }
+        public static UserInRoleEntity ToBllUserInRole(this DalUserInRole dalUserInRole)
+        {
+            return new UserInRoleEntity
+            {
+                Id = dalUserInRole.Id,
+                RoleId = dalUserInRole.RoleId,
+                UserId = dalUserInRole.UserId
+            };
+        }
+        public static DalUserInRole ToDalUserInRole(this UserInRoleEntity bllUserInRole)
+        {
+            return new DalUserInRole
+            {
+                Id = bllUserInRole.Id,
+                RoleId = bllUserInRole.RoleId,
+                UserId = bllUserInRole.UserId
+            };
+        }
     }
 }

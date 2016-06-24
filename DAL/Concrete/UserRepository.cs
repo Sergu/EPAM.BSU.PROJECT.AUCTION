@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using DAL.Interfaces.Repository;
 using DAL.Interfaces.DTO;
 using ORM;
-using DAL.Mappers;
 
 namespace DAL.Concrete
 {

@@ -49,6 +49,10 @@ namespace Auction.Infrastructure
             kernel.Bind<IPaymentServiceProvider>().To<PaymentServiceProvider>();
             kernel.Bind<IBetHistoryRepository>().To<BetHistoryRepository>();
             kernel.Bind<IBetHistoryService>().To<BetHistoryService>();
+            kernel.Bind<IUserInRoleRepository>().To<UserInRoleRepository>();
+            kernel.Bind<IUserInRoleService>().To<UserInRoleService>();
+            kernel.Bind<IRoleRepository>().To<RoleRepository>();
+            kernel.Bind<IRoleService>().To<RoleService>();
         }
     }
 }
