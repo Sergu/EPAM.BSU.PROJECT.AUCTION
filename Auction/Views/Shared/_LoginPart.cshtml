@@ -12,7 +12,14 @@
             </ul>
         </li>
         <li>
-            <a href="@Url.Action("Room","Account")" class="disabled"><span class="glyphicon glyphicon-user"></span> @User.Identity.Name </a>
+            @if (User.IsInRole("admin"))
+            {
+                <a href="@Url.Action("Room","Account")" class="disabled"><span class="glyphicon glyphicon-tower"></span> @User.Identity.Name </a>
+            }
+            @if (!User.IsInRole("admin"))
+            {
+                <a href="@Url.Action("Room","Account")" class="disabled"><span class="glyphicon glyphicon-user"></span> @User.Identity.Name </a>
+            }
         </li>
         <li style="margin-top:8px;">
             @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))

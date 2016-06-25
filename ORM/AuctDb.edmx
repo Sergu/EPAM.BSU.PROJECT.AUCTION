@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BetHistory">
           <Key>
             <PropertyRef Name="id" />
@@ -62,6 +62,7 @@
           <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="money" Type="int" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="UserInRole">
           <Key>
@@ -292,8 +293,7 @@
             <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -369,6 +369,7 @@
           <NavigationProperty Name="Lots1" Relationship="Self.FK_user_seller" FromRole="User" ToRole="Lot" />
           <NavigationProperty Name="UserInRoles" Relationship="Self.FK_id_user" FromRole="User" ToRole="UserInRole" />
           <NavigationProperty Name="webpages_Roles" Relationship="Self.webpages_UsersInRoles" FromRole="User" ToRole="webpages_Roles" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UserInRole">
           <Key>
@@ -632,6 +633,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="Model.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="login" ColumnName="login" />
                 <ScalarProperty Name="money" ColumnName="money" />

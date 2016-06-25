@@ -26,7 +26,8 @@ namespace DAL.Concrete
                     Id = user.id,
                     Login = user.login,
                     Money = user.money,
-                    Email = user.email   
+                    Email = user.email,
+                    Password = user.password
                 })
                 .FirstOrDefault();
         }
@@ -37,7 +38,8 @@ namespace DAL.Concrete
                     Id = user.id,
                     Login = user.login,
                     Money = user.money,
-                    Email = user.email                  
+                    Email = user.email,
+                    Password = user.password
                 });
             return col;
         }
@@ -48,7 +50,8 @@ namespace DAL.Concrete
                     Id = user.id,
                     Login = user.login,
                     Money = user.money,
-                    Email = user.email
+                    Email = user.email,
+                    Password = user.password
                 })
                 .FirstOrDefault();
         }
@@ -58,7 +61,8 @@ namespace DAL.Concrete
             {
                 login = entity.Login,
                 money = entity.Money,
-                email = entity.Email
+                email = entity.Email,
+                password = entity.Password
             };
             context.Set<User>().Add(user);
             context.SaveChanges();

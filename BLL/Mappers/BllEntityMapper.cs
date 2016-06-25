@@ -17,7 +17,8 @@ namespace BLL.Mappers
                 Id = userEntity.Id,
                 Login = userEntity.Login,
                 Money = userEntity.Money,
-                Email = userEntity.Email
+                Email = userEntity.Email,
+                Password = userEntity.Password
             };
         }
         public static UserEntity ToBllUser(this DalUser dalUser)
@@ -27,7 +28,8 @@ namespace BLL.Mappers
                 Id = dalUser.Id,
                 Login = dalUser.Login,
                 Money = dalUser.Money,
-                Email = dalUser.Email
+                Email = dalUser.Email,
+                Password = dalUser.Password
             };
         }
         public static LotEntity ToBllLot(this DalLot dallot)

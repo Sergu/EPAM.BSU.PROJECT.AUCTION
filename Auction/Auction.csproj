@@ -222,6 +222,8 @@
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\CustomMembershipProvider.cs" />
+    <Compile Include="Providers\CustomPrincipal.cs" />
+    <Compile Include="Providers\CustomRoleProvider.cs" />
     <Compile Include="Validators\CustomLotBetValidator.cs" />
     <Compile Include="Validators\CustomLotEndDateValidator.cs" />
     <Compile Include="Validators\CustomPurchaseMoneyValidator.cs" />

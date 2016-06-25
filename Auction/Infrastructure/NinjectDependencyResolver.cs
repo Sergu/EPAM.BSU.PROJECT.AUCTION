@@ -11,6 +11,8 @@ using DAL.Concrete;
 using BLL.Services;
 using BLL.interfaces.Services;
 using ORM;
+using System.Web.Security;
+using Auction.Providers;
 
 namespace Auction.Infrastructure
 {
@@ -37,7 +39,7 @@ namespace Auction.Infrastructure
         private void AddBindings()
         {
             kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InRequestScope();
-            kernel.Bind<DbContext>().To<AuctionDbEntities>().InRequestScope();
+            kernel.Bind<DbContext>().To<NewConnection>().InRequestScope();
             kernel.Bind<ILotMonitoringService>().To<LotMonitoringService>().InSingletonScope();
 
             kernel.Bind<IUserService>().To<UserService>();
@@ -53,6 +55,7 @@ namespace Auction.Infrastructure
             kernel.Bind<IUserInRoleService>().To<UserInRoleService>();
             kernel.Bind<IRoleRepository>().To<RoleRepository>();
             kernel.Bind<IRoleService>().To<RoleService>();
+            kernel.Bind<RoleProvider>().To<CustomRoleProvider>();
         }
     }
 }

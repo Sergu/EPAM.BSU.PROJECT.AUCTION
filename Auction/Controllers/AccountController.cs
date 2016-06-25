@@ -17,7 +17,7 @@ using Auction.Infrastructure.Mappers;
 namespace Auction.Controllers
 {
     [Authorize]
-    [InitializeSimpleMembership]
+    //[InitializeSimpleMembership]
     public class AccountController : Controller
     {
         private IUserService userService;
@@ -73,13 +73,40 @@ namespace Auction.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.login, model.Password, persistCookie: model.RememberMe))
-            {
-                return RedirectToLocal(returnUrl);
+            //if (ModelState.IsValid && WebSecurity.Login(model.login, model.Password, persistCookie: model.RememberMe))
+            //{
+            //    return RedirectToLocal(returnUrl);
                 
+            //}
+
+            if (ModelState.IsValid)
+            {
+                //if (Membership.ValidateUser(model.login, model.Password))
+                //{
+                //    FormsAuthentication.SetAuthCookie(model.login, model.RememberMe);
+                //    return RedirectToAction("Index", "Home");
+                //    //RedirectToLocal(returnUrl);
+
+                //}
+                //else
+                //{
+                //    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                //}
+
+                if (Membership.ValidateUser(model.login, model.Password))
+                {
+                    var user = userService.GetUserByLogin(model.login);
+
+                    FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(model.login, false, 20);
+
+                    string encTicket = FormsAuthentication.Encrypt(authTicket);
+                    HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
+                    Response.Cookies.Add(cookie);
+
+                    return RedirectToAction("Index", "Home");
+                }
             }
             
-            // Появление этого сообщения означает наличие ошибки; повторное отображение формы
             ModelState.AddModelError("", "Неверный пароль или логин");
             return View(model);
         }
@@ -91,7 +118,8 @@ namespace Auction.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            WebSecurity.Logout();
+            FormsAuthentication.SignOut();
+            Session["files"] = null;
 
             return RedirectToAction("Index", "Home");
         }

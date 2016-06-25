@@ -27,6 +27,7 @@ namespace ORM
         public string login { get; set; }
         public int money { get; set; }
         public string email { get; set; }
+        public string password { get; set; }
     
         public virtual ICollection<BetHistory> BetHistories { get; set; }
         public virtual ICollection<Lot> Lots { get; set; }

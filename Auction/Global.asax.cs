@@ -7,7 +7,9 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Auction.Infrastructure;
+using Auction.Providers;
 using BLL.interfaces.Services;
+using System.Web.Security;
 
 namespace Auction
 {
@@ -28,6 +30,19 @@ namespace Auction
             NinjectDependencyResolver dependencyResolver = new NinjectDependencyResolver();
             DependencyResolver.SetResolver(dependencyResolver);
             dependencyResolver.GetInstanse<ILotMonitoringService>();
+        }
+        protected void Application_PostAuthenticateRequest(Object sender, EventArgs e)
+        {
+            HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+
+            if (authCookie != null)
+            {
+                FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+
+                CustomPrincipal newUser = new CustomPrincipal(authTicket.Name);
+
+                HttpContext.Current.User = newUser;
+            }
         }
     }
 }

@@ -13,10 +13,10 @@ namespace ORM
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class AuctionDbEntities : DbContext
+    public partial class NewConnection : DbContext
     {
-        public AuctionDbEntities()
-            : base("name=AuctionDbEntities")
+        public NewConnection()
+            : base("name=NewConnection")
         {
         }
     
