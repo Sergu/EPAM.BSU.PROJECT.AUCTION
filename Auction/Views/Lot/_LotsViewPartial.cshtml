@@ -7,17 +7,36 @@
         @foreach (LotViewModel item in Model.Lots)
         {
             <div class="panel panel-body col-sm-6">
-                <div class="col-sm-5">
+                <div class="col-sm-12">
                     <h4>@item.Name</h4>
+                </div>
+                <div class="col-sm-5">
                     <h6>lot №: @item.Id</h6>
-                    <h6>@item.BeginDate</h6>
-                    <h6>@Html.DisplayFor(modelItem => item.EndDate)</h6>
+                    <h6>Active: @item.IsActive</h6>
+                    <h6>Category: @item.Category</h6>
                 </div>
                 <div class="col-sm-6">
-                    <h6>Prim Cost: @item.PrimaryCost</h6>
-                    <h6>Cur Cost: @item.CurrentCost</h6>
+                    <h6>Cost: @item.CurrentCost</h6>
+                    <h6>Bet count <span class="badge">@item.betCount</span></h6>
                 </div>
-                <a class="btn btn-default" href="@Url.Action("Details", "Lot", new { id = @item.Id})" role="button">View Details >></a>
+                <div class="col-sm-12">
+                    <p>Begin: @item.BeginDate</p>
+                    <p>End: @item.EndDate</p>
+                    @if (item.IsActive)
+                    {
+                        var remain = item.EndDate.Subtract(DateTime.Now);
+                        <p>@remain.Days days @remain.Hours hours @remain.Minutes min @remain.Seconds sec</p>
+                    }
+                    <div class="col-sm-6">
+                        <a class="btn btn-default" href="@Url.Action("Details", "Lot", new { id = @item.Id})" role="button">View Details >></a>
+                    </div>
+                    <div class="col-sm-6">
+                        @if (User.IsInRole("admin"))
+                        {
+                            <a class="btn btn-warning" href="@Url.Action("Remove", "Lot", new { id = @item.Id})" role="button">Remove</a>
+                        }
+                    </div>
+                </div>
             </div>
         }
     </div>

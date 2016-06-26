@@ -20,7 +20,6 @@ namespace ORM
             this.Lots = new HashSet<Lot>();
             this.Lots1 = new HashSet<Lot>();
             this.UserInRoles = new HashSet<UserInRole>();
-            this.webpages_Roles = new HashSet<webpages_Roles>();
         }
     
         public int id { get; set; }
@@ -33,6 +32,5 @@ namespace ORM
         public virtual ICollection<Lot> Lots { get; set; }
         public virtual ICollection<Lot> Lots1 { get; set; }
         public virtual ICollection<UserInRole> UserInRoles { get; set; }
-        public virtual ICollection<webpages_Roles> webpages_Roles { get; set; }
     }
 }

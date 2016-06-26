@@ -55,8 +55,8 @@ namespace DAL.Concrete
         public void Delete(int id)
         {
             var bet = context.Set<BetHistory>().FirstOrDefault(b => b.id == id);
-            context.Set<BetHistory>().Remove(bet);
-            context.SaveChanges();
+            context.Entry(bet).State = EntityState.Deleted;
+            //context.SaveChanges();
         }
     }
 }

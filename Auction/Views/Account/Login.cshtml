@@ -1,42 +1,32 @@
 ﻿@model Auction.Models.LoginModel
 
-@{
-    ViewBag.Title = "Выполнить вход";
-}
-
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-</hgroup>
 
 <section id="loginForm">
-<h2>Используйте для входа локальную учетную запись.</h2>
-@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+<h2>Login</h2>
+@using (Html.BeginForm("Login","Account")) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)  
-    
-    
     <fieldset>
-        <legend>Форма входа</legend>
-        <ol>
-            <li>
+        <div class="form-horizontal">
+            <div class="form-group">
                 @Html.LabelFor(m => m.login)
-                @Html.TextBoxFor(m => m.login)
-                @Html.ValidationMessageFor(m => m.login)
-            </li>
-            <li>
+                @Html.TextBoxFor(m => m.login, new { @class = "form-control", @style = "max-width:360px" })
+            </div>
+            <div class="form-group">
                 @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
-                @Html.ValidationMessageFor(m => m.Password)
-            </li>
-            <li>
-                @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
-            </li>
-        </ol>
-        <input type="submit" value="Выполнить вход" />
+                @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @style = "max-width:360px;", @type="password"})
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RememberMe)
+                @Html.CheckBoxFor(m => m.RememberMe, new { @class = "form-control", @style = "max-width:60px;" })
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-default" value="Login" />
+            </div>
+        </div>
     </fieldset>
     <p>
-        @Html.ActionLink("Зарегистрируйтесь", "Register"), если у вас нет учетной записи.
+        @Html.ActionLink("Register", "Register"), if you havn't got account.
     </p>
 }
 </section>

@@ -14,9 +14,13 @@ namespace Auction.Providers
     public class CustomMembershipProvider : MembershipProvider
     {
         private IUserService userService;
+        private IUserInRoleService userInRoleService;
+        private IRoleService roleService;
         public CustomMembershipProvider()
         {
-            this.userService = userService = (IUserService)System.Web.Mvc.DependencyResolver.Current.GetService(typeof(IUserService));
+            this.userService = (IUserService)System.Web.Mvc.DependencyResolver.Current.GetService(typeof(IUserService));
+            this.userInRoleService = (IUserInRoleService)System.Web.Mvc.DependencyResolver.Current.GetService(typeof(IUserInRoleService));
+            this.roleService = (IRoleService)System.Web.Mvc.DependencyResolver.Current.GetService(typeof(IRoleService));
         }
         public override MembershipUser GetUser(string login, bool userIsOnline)
         {
@@ -49,8 +53,15 @@ namespace Auction.Providers
             {
                 try
                 {
-
                     userService.Create(user);
+                    var createdUser = userService.GetUserByLogin(user.Login);
+                    var role = roleService.GetRoleByName("user");
+                    var userInRole = new UserInRoleEntity
+                    {
+                        UserId = createdUser.Id,
+                        RoleId = role.Id
+                    };                    
+                    userInRoleService.Create(userInRole);
                     membershipUser = GetUser(user.Login, false);
                     return membershipUser;
                 }

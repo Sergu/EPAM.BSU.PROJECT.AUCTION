@@ -76,9 +76,13 @@ namespace Auction.Controllers
                             UserId = user.Id
                         };
                         betService.Create(bet);
-                        return RedirectToAction("Details", new { id = lot.Id});
+                        return RedirectToAction("Details", new { id = lot.Id });
                     }
-                }               
+                    else
+                        ModelState.AddModelError("", "bet should be more than current cost of the lot");
+                }   
+                else
+                    ModelState.AddModelError("", string.Format("not enought money. balance: {0}", model.Balance));
             }
             var lotViewModel = ToLotViewModel(lotService.GetLotById(model.LotId));
             model = new DetailsLotModel
@@ -253,6 +257,17 @@ namespace Auction.Controllers
             }
             model.Categories = categoryService.GetCategoriesForLotCreation().Select(c => c.ToCategoryForLotModel());
             return View(model);
+        }
+        [Authorize(Roles="admin")]
+        public ActionResult Remove(int id)
+        {
+            var bets = betService.GetBetsByLotId(id);
+            foreach (var bet in bets)
+            {
+                betService.Delete(bet.Id);
+            }
+            lotService.Delete(id);
+            return RedirectToAction("ActiveIndex");
         }
 
         [NonAction]

@@ -85,15 +85,6 @@
     <Compile Include="UserInRole.cs">
       <DependentUpon>AuctDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="webpages_Membership.cs">
-      <DependentUpon>AuctDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="webpages_OAuthMembership.cs">
-      <DependentUpon>AuctDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="webpages_Roles.cs">
-      <DependentUpon>AuctDb.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
