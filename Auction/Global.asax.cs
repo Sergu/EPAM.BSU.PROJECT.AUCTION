@@ -29,7 +29,7 @@ namespace Auction
             AuthConfig.RegisterAuth();
             NinjectDependencyResolver dependencyResolver = new NinjectDependencyResolver();
             DependencyResolver.SetResolver(dependencyResolver);
-            dependencyResolver.GetInstanse<ILotMonitoringService>();
+            dependencyResolver.GetService(typeof(ILotMonitoringService));
         }
         protected void Application_PostAuthenticateRequest(Object sender, EventArgs e)
         {

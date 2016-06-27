@@ -32,10 +32,6 @@ namespace Auction.Infrastructure
         {
             return kernel.GetAll(serviceType);
         }
-        public object GetInstanse<T>()
-        {
-            return kernel.TryGet<T>();
-        }
         private void AddBindings()
         {
             kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InRequestScope();
