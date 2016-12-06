@@ -34,5 +34,12 @@ namespace ORM
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserInBan> UserInBan { get; set; }
         public virtual DbSet<UserInRole> UserInRole { get; set; }
+        public virtual DbSet<Album> Album { get; set; }
+        public virtual DbSet<Comment> Comment { get; set; }
+        public virtual DbSet<EmailNotification> EmailNotification { get; set; }
+        public virtual DbSet<EmailNotificationType> EmailNotificationType { get; set; }
+        public virtual DbSet<Photo> Photo { get; set; }
+        public virtual DbSet<PhotoInAlbum> PhotoInAlbum { get; set; }
+        public virtual DbSet<StepBet> StepBet { get; set; }
     }
 }

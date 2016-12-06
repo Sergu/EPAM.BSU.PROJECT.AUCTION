@@ -22,6 +22,9 @@ namespace ORM
             this.Lot1 = new HashSet<Lot>();
             this.UserInRole = new HashSet<UserInRole>();
             this.UserInBan = new HashSet<UserInBan>();
+            this.EmailNotification = new HashSet<EmailNotification>();
+            this.StepBet = new HashSet<StepBet>();
+            this.Comment = new HashSet<Comment>();
         }
     
         public int id { get; set; }
@@ -40,5 +43,11 @@ namespace ORM
         public virtual ICollection<UserInRole> UserInRole { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserInBan> UserInBan { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmailNotification> EmailNotification { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StepBet> StepBet { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comment { get; set; }
     }
 }
