@@ -35,7 +35,7 @@ namespace Auction.Infrastructure
         private void AddBindings()
         {
             kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InRequestScope();
-            kernel.Bind<DbContext>().To<NewConnection>().InRequestScope();
+            kernel.Bind<DbContext>().To<WebAuctionEntities>().InRequestScope();
             kernel.Bind<ILotMonitoringService>().To<LotMonitoringService>().InSingletonScope();
 
             kernel.Bind<IUserService>().To<UserService>();

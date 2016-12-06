@@ -12,18 +12,18 @@ namespace ORM
     using System;
     using System.Collections.Generic;
     
-    public partial class Role
+    public partial class BanType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Role()
+        public BanType()
         {
-            this.UserInRole = new HashSet<UserInRole>();
+            this.UserInBan = new HashSet<UserInBan>();
         }
     
-        public int id { get; set; }
-        public string role1 { get; set; }
+        public int Id { get; set; }
+        public string Type { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserInRole> UserInRole { get; set; }
+        public virtual ICollection<UserInBan> UserInBan { get; set; }
     }
 }

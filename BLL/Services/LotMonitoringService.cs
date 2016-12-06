@@ -34,8 +34,8 @@ namespace BLL.Services
         public void ChangeTimer()
         {
             long elapsedTime;
-            var lot = lotService.GetAllActiveLots().OrderBy(l => l.EndDate).FirstOrDefault();
-            var remain = lot.EndDate.Subtract(DateTime.Now);
+            var lot = lotService.GetAllActiveLots().OrderBy(l => l.EndDate).FirstOrDefault();          
+            var remain = lot?.EndDate.Subtract(DateTime.Now) ?? TimeSpan.MaxValue;
             if (remain.TotalMilliseconds < defaultElapsedTime)
             {
                 elapsedTime = (long)remain.TotalMilliseconds;

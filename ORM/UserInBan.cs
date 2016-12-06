@@ -12,15 +12,14 @@ namespace ORM
     using System;
     using System.Collections.Generic;
     
-    public partial class BetHistory
+    public partial class UserInBan
     {
-        public int id { get; set; }
-        public int lot_id { get; set; }
-        public Nullable<int> user_id { get; set; }
-        public int coast { get; set; }
-        public System.DateTime date { get; set; }
+        public int Id { get; set; }
+        public int User_Id { get; set; }
+        public int BanType_Id { get; set; }
+        public string Reason { get; set; }
     
-        public virtual Lot Lot { get; set; }
+        public virtual BanType BanType { get; set; }
         public virtual User User { get; set; }
     }
 }

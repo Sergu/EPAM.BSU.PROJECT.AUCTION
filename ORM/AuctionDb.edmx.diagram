@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9f3b06b6ffb045d1a7d218fd3fd8ba49" Name="Diagram1">
+        <EntityTypeShape EntityType="WebAuctionModel.BanType" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAuctionModel.BetHistory" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAuctionModel.Category" Width="1.5" PointX="3.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAuctionModel.Lot" Width="1.5" PointX="6" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAuctionModel.LotProperty" Width="1.5" PointX="8.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAuctionModel.Role" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAuctionModel.User" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAuctionModel.UserInBan" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAuctionModel.UserInRole" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <AssociationConnector Association="WebAuctionModel.FK_UserInBan_BanTypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAuctionModel.FK_bet_lot_id" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAuctionModel.FK_user_id" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAuctionModel.FK_category" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAuctionModel.FK_lot_id" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAuctionModel.FK_user_bet" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAuctionModel.FK_user_seller" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAuctionModel.FK_id_role" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAuctionModel.FK_id_user" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAuctionModel.FK_UserInBan_UserId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

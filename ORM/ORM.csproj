@@ -63,27 +63,48 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AuctDb.edmx</DependentUpon>
     </Compile>
+    <Compile Include="AuctionDb.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AuctionDb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AuctionDb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AuctionDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AuctionDb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AuctionDb.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="BanType.cs">
+      <DependentUpon>AuctionDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="BetHistory.cs">
-      <DependentUpon>AuctDb.tt</DependentUpon>
+      <DependentUpon>AuctionDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Category.cs">
-      <DependentUpon>AuctDb.tt</DependentUpon>
+      <DependentUpon>AuctionDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Lot.cs">
-      <DependentUpon>AuctDb.tt</DependentUpon>
+      <DependentUpon>AuctionDb.tt</DependentUpon>
     </Compile>
     <Compile Include="LotProperty.cs">
-      <DependentUpon>AuctDb.tt</DependentUpon>
+      <DependentUpon>AuctionDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Role.cs">
-      <DependentUpon>AuctDb.tt</DependentUpon>
+      <DependentUpon>AuctionDb.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>AuctDb.tt</DependentUpon>
+      <DependentUpon>AuctionDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserInBan.cs">
+      <DependentUpon>AuctionDb.tt</DependentUpon>
     </Compile>
     <Compile Include="UserInRole.cs">
-      <DependentUpon>AuctDb.tt</DependentUpon>
+      <DependentUpon>AuctionDb.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +115,13 @@
     </EntityDeploy>
     <None Include="AuctDb.edmx.diagram">
       <DependentUpon>AuctDb.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="AuctionDb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AuctionDb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="AuctionDb.edmx.diagram">
+      <DependentUpon>AuctionDb.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -110,6 +138,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>AuctDb.edmx</DependentUpon>
       <LastGenOutput>AuctDb.cs</LastGenOutput>
+    </Content>
+    <Content Include="AuctionDb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AuctionDb.edmx</DependentUpon>
+      <LastGenOutput>AuctionDb.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="AuctionDb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AuctionDb.edmx</DependentUpon>
+      <LastGenOutput>AuctionDb.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
