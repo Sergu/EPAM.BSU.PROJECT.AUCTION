@@ -48,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Album.cs">
+      <DependentUpon>AuctionDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="AuctDb.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -87,14 +90,32 @@
     <Compile Include="Category.cs">
       <DependentUpon>AuctionDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Comment.cs">
+      <DependentUpon>AuctionDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmailNotification.cs">
+      <DependentUpon>AuctionDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmailNotificationType.cs">
+      <DependentUpon>AuctionDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Lot.cs">
       <DependentUpon>AuctionDb.tt</DependentUpon>
     </Compile>
     <Compile Include="LotProperty.cs">
       <DependentUpon>AuctionDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Photo.cs">
+      <DependentUpon>AuctionDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PhotoInAlbum.cs">
+      <DependentUpon>AuctionDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Role.cs">
+      <DependentUpon>AuctionDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StepBet.cs">
       <DependentUpon>AuctionDb.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
@@ -108,7 +129,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="AuctDb.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AuctDb.Designer.cs</LastGenOutput>
