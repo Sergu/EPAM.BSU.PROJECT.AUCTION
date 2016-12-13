@@ -166,5 +166,61 @@ namespace BLL.Mappers
                 UserId = bllUserInRole.UserId
             };
         }
+        public static DalPhoto ToDalPhoto(this PhotoEntity photoEntity)
+        {
+            return new DalPhoto()
+            {
+                Id = photoEntity.Id,
+                FilePath = photoEntity.FilePath,
+                Name = photoEntity.Name
+            };
+        }
+        public static PhotoEntity ToBllPhoto(this DalPhoto photoDal)
+        {
+            return new PhotoEntity()
+            {
+                Id = photoDal.Id,
+                FilePath = photoDal.FilePath,
+                Name = photoDal.Name
+            };
+        }
+        public static DalAlbum ToDalAlbum(this AlbumEntity album)
+        {
+            return new DalAlbum()
+            {
+                Id = album.Id,
+                Description = album.Description,
+                Lot_Id = album.Lot_Id,
+                Name = album.Name
+            };
+        }
+        public static AlbumEntity ToBllAlbum(this DalAlbum album)
+        {
+            return new AlbumEntity()
+            {
+                Id = album.Id,
+                Description = album.Description,
+                Lot_Id = album.Lot_Id,
+                Name = album.Name
+            };
+        }
+        public static DalPhotoInAlbum ToDalPhotoInAlbum(this PhotoInAlbumEntity entity)
+        {
+            return new DalPhotoInAlbum()
+            {
+                Id = entity.Id,
+                AlbumId = entity.AlbumId,
+                PhotoId = entity.PhotoId
+            };
+        }
+        public static PhotoInAlbumEntity ToBllPhotoInAlbum(this DalPhotoInAlbum entity)
+        {
+            return new PhotoInAlbumEntity()
+            {
+                Id = entity.Id,
+                AlbumId = entity.AlbumId,
+                PhotoId = entity.PhotoId
+            };
+        }
     }
 }

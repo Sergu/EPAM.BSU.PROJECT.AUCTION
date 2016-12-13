@@ -52,6 +52,13 @@ namespace Auction.Infrastructure
             kernel.Bind<IRoleRepository>().To<RoleRepository>();
             kernel.Bind<IRoleService>().To<RoleService>();
             kernel.Bind<RoleProvider>().To<CustomRoleProvider>();
+            kernel.Bind<IPhotoRepository>().To<PhotoRepository>();
+            kernel.Bind<IAlbumRepository>().To<AlbumRepository>();
+            kernel.Bind<IPhotoInAlbumRepository>().To<PhotoInAlbumRepository>();
+            kernel.Bind<IPhotoService>().To<PhotoService>();
+            kernel.Bind<IAlbumService>().To<AlbumService>();
+            kernel.Bind<IPhotoInAlbumService>().To<PhotoInAlbumService>();
+
         }
     }
 }

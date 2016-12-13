@@ -48,10 +48,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Concrete\AlbumRepository.cs" />
     <Compile Include="Concrete\BetHistoryRepository.cs" />
     <Compile Include="Concrete\CategoryRepository.cs" />
     <Compile Include="Concrete\LotPropertyRepository.cs" />
     <Compile Include="Concrete\LotRepository.cs" />
+    <Compile Include="Concrete\PhotoInAlbumRepository.cs" />
+    <Compile Include="Concrete\PhotoRepository.cs" />
     <Compile Include="Concrete\RoleRepository.cs" />
     <Compile Include="Concrete\UnitOfWork.cs" />
     <Compile Include="Concrete\UserInRoleRepository.cs" />

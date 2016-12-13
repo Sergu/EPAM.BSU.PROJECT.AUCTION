@@ -98,7 +98,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FilePath" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="PhotoInAlbum">
           <Key>
@@ -153,7 +153,9 @@
           <Property Name="user_id" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Album_LotId">
-          <End Role="Lot" Type="Self.Lot" Multiplicity="1" />
+          <End Role="Lot" Type="Self.Lot" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Album" Type="Self.Album" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Lot">
@@ -191,7 +193,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Comment_LotId">
-          <End Role="Lot" Type="Self.Lot" Multiplicity="1" />
+          <End Role="Lot" Type="Self.Lot" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Lot">
@@ -293,7 +297,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PhotoInAlbum_AlbumId">
-          <End Role="Album" Type="Self.Album" Multiplicity="1" />
+          <End Role="Album" Type="Self.Album" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="PhotoInAlbum" Type="Self.PhotoInAlbum" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Album">
@@ -794,16 +800,10 @@
           <EntitySet Name="Comment" EntityType="WebAuctionModel.Comment" />
           <EntitySet Name="EmailNotification" EntityType="WebAuctionModel.EmailNotification" />
           <EntitySet Name="EmailNotificationType" EntityType="WebAuctionModel.EmailNotificationType" />
-          <EntitySet Name="Photo" EntityType="WebAuctionModel.Photo" />
-          <EntitySet Name="PhotoInAlbum" EntityType="WebAuctionModel.PhotoInAlbum" />
           <EntitySet Name="StepBet" EntityType="WebAuctionModel.StepBet" />
           <AssociationSet Name="FK_Album_LotId" Association="WebAuctionModel.FK_Album_LotId">
             <End Role="Lot" EntitySet="Lot" />
             <End Role="Album" EntitySet="Album" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PhotoInAlbum_AlbumId" Association="WebAuctionModel.FK_PhotoInAlbum_AlbumId">
-            <End Role="Album" EntitySet="Album" />
-            <End Role="PhotoInAlbum" EntitySet="PhotoInAlbum" />
           </AssociationSet>
           <AssociationSet Name="FK_EmailNotification_EmailNotificationTypeId" Association="WebAuctionModel.FK_EmailNotification_EmailNotificationTypeId">
             <End Role="EmailNotificationType" EntitySet="EmailNotificationType" />
@@ -821,10 +821,6 @@
             <End Role="Lot" EntitySet="Lot" />
             <End Role="StepBet" EntitySet="StepBet" />
           </AssociationSet>
-          <AssociationSet Name="FK_PhotoInAlbum_PhotoId" Association="WebAuctionModel.FK_PhotoInAlbum_PhotoId">
-            <End Role="Photo" EntitySet="Photo" />
-            <End Role="PhotoInAlbum" EntitySet="PhotoInAlbum" />
-          </AssociationSet>
           <AssociationSet Name="FK_StepBet_UserId" Association="WebAuctionModel.FK_StepBet_UserId">
             <End Role="User" EntitySet="User" />
             <End Role="StepBet" EntitySet="StepBet" />
@@ -836,6 +832,16 @@
           <AssociationSet Name="FK_Comment_UserId" Association="WebAuctionModel.FK_Comment_UserId">
             <End Role="User" EntitySet="User" />
             <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <EntitySet Name="Photo" EntityType="WebAuctionModel.Photo" />
+          <EntitySet Name="PhotoInAlbum" EntityType="WebAuctionModel.PhotoInAlbum" />
+          <AssociationSet Name="FK_PhotoInAlbum_AlbumId" Association="WebAuctionModel.FK_PhotoInAlbum_AlbumId">
+            <End Role="Album" EntitySet="Album" />
+            <End Role="PhotoInAlbum" EntitySet="PhotoInAlbum" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotoInAlbum_PhotoId" Association="WebAuctionModel.FK_PhotoInAlbum_PhotoId">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="PhotoInAlbum" EntitySet="PhotoInAlbum" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Album">
@@ -884,25 +890,6 @@
           <Property Name="TypeDecriprion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="EmailNotification" Relationship="WebAuctionModel.FK_EmailNotification_EmailNotificationTypeId" FromRole="EmailNotificationType" ToRole="EmailNotification" />
         </EntityType>
-        <EntityType Name="Photo">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FilePath" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PhotoInAlbum" Relationship="WebAuctionModel.FK_PhotoInAlbum_PhotoId" FromRole="Photo" ToRole="PhotoInAlbum" />
-        </EntityType>
-        <EntityType Name="PhotoInAlbum">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Album_Id" Type="Int32" Nullable="false" />
-          <Property Name="Photo_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Album" Relationship="WebAuctionModel.FK_PhotoInAlbum_AlbumId" FromRole="PhotoInAlbum" ToRole="Album" />
-          <NavigationProperty Name="Photo" Relationship="WebAuctionModel.FK_PhotoInAlbum_PhotoId" FromRole="PhotoInAlbum" ToRole="Photo" />
-        </EntityType>
         <EntityType Name="StepBet">
           <Key>
             <PropertyRef Name="Id" />
@@ -924,18 +911,6 @@
             </Principal>
             <Dependent Role="Album">
               <PropertyRef Name="Lot_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PhotoInAlbum_AlbumId">
-          <End Type="WebAuctionModel.Album" Role="Album" Multiplicity="1" />
-          <End Type="WebAuctionModel.PhotoInAlbum" Role="PhotoInAlbum" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Album">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PhotoInAlbum">
-              <PropertyRef Name="Album_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -987,18 +962,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PhotoInAlbum_PhotoId">
-          <End Type="WebAuctionModel.Photo" Role="Photo" Multiplicity="1" />
-          <End Type="WebAuctionModel.PhotoInAlbum" Role="PhotoInAlbum" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Photo">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PhotoInAlbum">
-              <PropertyRef Name="Photo_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_StepBet_UserId">
           <End Type="WebAuctionModel.User" Role="User" Multiplicity="1" />
           <End Type="WebAuctionModel.StepBet" Role="StepBet" Multiplicity="*" />
@@ -1032,6 +995,51 @@
             </Principal>
             <Dependent Role="Comment">
               <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FilePath" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PhotoInAlbum" Relationship="WebAuctionModel.FK_PhotoInAlbum_PhotoId" FromRole="Photo" ToRole="PhotoInAlbum" />
+        </EntityType>
+        <EntityType Name="PhotoInAlbum">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Album_Id" Type="Int32" Nullable="false" />
+          <Property Name="Photo_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Album" Relationship="WebAuctionModel.FK_PhotoInAlbum_AlbumId" FromRole="PhotoInAlbum" ToRole="Album" />
+          <NavigationProperty Name="Photo" Relationship="WebAuctionModel.FK_PhotoInAlbum_PhotoId" FromRole="PhotoInAlbum" ToRole="Photo" />
+        </EntityType>
+        <Association Name="FK_PhotoInAlbum_AlbumId">
+          <End Type="WebAuctionModel.Album" Role="Album" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WebAuctionModel.PhotoInAlbum" Role="PhotoInAlbum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Album">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhotoInAlbum">
+              <PropertyRef Name="Album_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotoInAlbum_PhotoId">
+          <End Type="WebAuctionModel.Photo" Role="Photo" Multiplicity="1" />
+          <End Type="WebAuctionModel.PhotoInAlbum" Role="PhotoInAlbum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhotoInAlbum">
+              <PropertyRef Name="Photo_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1175,10 +1183,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="StepBet">
+            <EntityTypeMapping TypeName="WebAuctionModel.StepBet">
+              <MappingFragment StoreEntitySet="StepBet">
+                <ScalarProperty Name="Step" ColumnName="Step" />
+                <ScalarProperty Name="MaxBet" ColumnName="MaxBet" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Lot_Id" ColumnName="Lot_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Photo">
             <EntityTypeMapping TypeName="WebAuctionModel.Photo">
               <MappingFragment StoreEntitySet="Photo">
-                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="FilePath" ColumnName="FilePath" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -1189,17 +1208,6 @@
               <MappingFragment StoreEntitySet="PhotoInAlbum">
                 <ScalarProperty Name="Photo_Id" ColumnName="Photo_Id" />
                 <ScalarProperty Name="Album_Id" ColumnName="Album_Id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="StepBet">
-            <EntityTypeMapping TypeName="WebAuctionModel.StepBet">
-              <MappingFragment StoreEntitySet="StepBet">
-                <ScalarProperty Name="Step" ColumnName="Step" />
-                <ScalarProperty Name="MaxBet" ColumnName="MaxBet" />
-                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
-                <ScalarProperty Name="Lot_Id" ColumnName="Lot_Id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

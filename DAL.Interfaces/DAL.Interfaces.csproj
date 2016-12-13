@@ -39,26 +39,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\DalAlbum.cs" />
     <Compile Include="DTO\DalCategory.cs" />
     <Compile Include="DTO\DalBetHistory.cs" />
     <Compile Include="DTO\DalLot.cs" />
     <Compile Include="DTO\DalLotProperty.cs" />
+    <Compile Include="DTO\DalPhoto.cs" />
+    <Compile Include="DTO\DalPhotoInAlbum.cs" />
     <Compile Include="DTO\DalRole.cs" />
     <Compile Include="DTO\DalUser.cs" />
     <Compile Include="DTO\DalUserInRole.cs" />
     <Compile Include="DTO\IEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IAlbumRepository.cs" />
     <Compile Include="Repository\IBetHistoryRepository.cs" />
     <Compile Include="Repository\ICategoryRepository.cs" />
     <Compile Include="Repository\ILotPropertyRepository.cs" />
     <Compile Include="Repository\ILotRepository.cs" />
+    <Compile Include="Repository\IPhotoInAlbumRepository.cs" />
+    <Compile Include="Repository\IPhotoRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\IRoleRepository.cs" />
     <Compile Include="Repository\IUnitOfWork.cs" />
     <Compile Include="Repository\IUserInRoleRepository.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ORM\ORM.csproj">
+      <Project>{E7F1FAC7-9ED6-4D66-9ACF-2B395F343916}</Project>
+      <Name>ORM</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

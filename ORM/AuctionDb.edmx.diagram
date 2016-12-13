@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9f3b06b6ffb045d1a7d218fd3fd8ba49" Name="Diagram1" ZoomLevel="81">
+      <Diagram DiagramId="9f3b06b6ffb045d1a7d218fd3fd8ba49" Name="Diagram1" ZoomLevel="62">
         <EntityTypeShape EntityType="WebAuctionModel.BanType" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="WebAuctionModel.BetHistory" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="WebAuctionModel.Category" Width="1.5" PointX="3.75" PointY="0.875" IsExpanded="true" />
@@ -28,19 +28,19 @@
         <EntityTypeShape EntityType="WebAuctionModel.Comment" Width="1.5" PointX="6.375" PointY="0.75" />
         <EntityTypeShape EntityType="WebAuctionModel.EmailNotification" Width="1.5" PointX="11.25" PointY="6.875" />
         <EntityTypeShape EntityType="WebAuctionModel.EmailNotificationType" Width="1.5" PointX="9" PointY="3.25" />
-        <EntityTypeShape EntityType="WebAuctionModel.Photo" Width="1.5" PointX="8.25" PointY="16.625" />
-        <EntityTypeShape EntityType="WebAuctionModel.PhotoInAlbum" Width="1.5" PointX="10.5" PointY="13.5" />
         <EntityTypeShape EntityType="WebAuctionModel.StepBet" Width="1.5" PointX="8.25" PointY="9.875" />
         <AssociationConnector Association="WebAuctionModel.FK_Album_LotId" />
-        <AssociationConnector Association="WebAuctionModel.FK_PhotoInAlbum_AlbumId" />
         <AssociationConnector Association="WebAuctionModel.FK_EmailNotification_EmailNotificationTypeId" />
         <AssociationConnector Association="WebAuctionModel.FK_EmailNotification_LotId" />
         <AssociationConnector Association="WebAuctionModel.FK_EmailNotification_UserId" />
         <AssociationConnector Association="WebAuctionModel.FK_StepBet_LotId" />
-        <AssociationConnector Association="WebAuctionModel.FK_PhotoInAlbum_PhotoId" />
         <AssociationConnector Association="WebAuctionModel.FK_StepBet_UserId" />
         <AssociationConnector Association="WebAuctionModel.FK_Comment_LotId" />
         <AssociationConnector Association="WebAuctionModel.FK_Comment_UserId" />
+        <EntityTypeShape EntityType="WebAuctionModel.Photo" Width="1.5" PointX="8.25" PointY="16.75" />
+        <EntityTypeShape EntityType="WebAuctionModel.PhotoInAlbum" Width="1.5" PointX="10.5" PointY="13.625" />
+        <AssociationConnector Association="WebAuctionModel.FK_PhotoInAlbum_AlbumId" />
+        <AssociationConnector Association="WebAuctionModel.FK_PhotoInAlbum_PhotoId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
