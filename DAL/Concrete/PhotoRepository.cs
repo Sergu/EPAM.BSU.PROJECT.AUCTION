@@ -30,6 +30,19 @@ namespace DAL.Concrete
                 }).FirstOrDefault();
         }
 
+        public int CreatePhoto(DalPhoto entity)
+        {
+            var photo = new Photo()
+            {
+                FilePath = entity.FilePath,
+                Name = entity.Name
+            };
+            var res = context.Set<Photo>().Add(photo);
+            context.SaveChanges();
+
+            return res.Id;
+        }
+
         public void Create(DalPhoto entity)
         {
             var photo = new Photo()

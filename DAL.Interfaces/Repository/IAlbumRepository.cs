@@ -10,5 +10,6 @@ namespace DAL.Interfaces.Repository
     public interface IAlbumRepository : IRepository<DalAlbum>
     {
         DalAlbum GetAlbumById(int id);
+        IEnumerable<DalAlbum> GetAlbumsByLotId(int lotId);
     }
 }

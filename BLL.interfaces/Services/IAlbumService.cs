@@ -10,5 +10,6 @@ namespace BLL.interfaces.Services
     public interface IAlbumService : IService<AlbumEntity>
     {
         AlbumEntity GetAlbomById(int id);
+        IEnumerable<AlbumEntity> GetAlbumsByLotId(int lotId);
     }
 }

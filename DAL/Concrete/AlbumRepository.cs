@@ -61,5 +61,18 @@ namespace DAL.Concrete
             context.Entry(album).State = EntityState.Modified;
             context.SaveChanges();
         }
+
+        public IEnumerable<DalAlbum> GetAlbumsByLotId(int lotId)
+        {
+            return context.Set<Album>()
+                .Where(e => e.Lot_Id == lotId)
+                .Select(e => new DalAlbum()
+                {
+                    Id = e.Id,
+                    Description = e.Description,
+                    Lot_Id = e.Lot_Id,
+                    Name = e.Name
+                });
+        }
     }
 }

@@ -24,11 +24,20 @@ namespace BLL.Services
         {
             return photoRepository.GetPhotoById(id).ToBllPhoto();
         }
+        public int CreatePhoto(PhotoEntity entity)
+        {
+            var id = photoRepository.CreatePhoto(entity.ToDalPhoto());
+            uow.Commit();
+
+            return id;
+        }
+
         public void Create(PhotoEntity entity)
         {
             photoRepository.Create(entity.ToDalPhoto());
             uow.Commit();
         }
+
         public void Update(PhotoEntity entity)
         {
             photoRepository.Update(entity.ToDalPhoto());

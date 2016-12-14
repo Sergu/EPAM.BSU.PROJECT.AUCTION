@@ -10,5 +10,6 @@ namespace DAL.Interfaces.Repository
     public interface IPhotoRepository : IRepository<DalPhoto>
     {
         DalPhoto GetPhotoById(int id);
+        int CreatePhoto(DalPhoto entity);
     }
 }

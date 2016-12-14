@@ -1,0 +1,25 @@
+﻿@using BLL.interfaces.Entities;
+@using Auction.Models.Album;
+@model AlbumCollectionModel
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">@Model.LotName Gallery</h1>
+    </div>
+    @foreach (AlbumEntity album in Model.Albums)
+    {
+        <div class="col-lg-4 col-md-4 col-xs-6 thumb thumbnail">
+            <a class="thumbnail" href="#">
+                <img class="img-responsive" src="#" alt="asd">
+            </a>
+            <div>
+                <span>@album.Name</span>
+            </div>
+            <div class="col-sm-12">
+                <button type="button" class="btn btn-info col-sm-offset-3 col-sm-6" href="#">View</button>
+            </div>
+        </div>
+    }
+</div>
+

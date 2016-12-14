@@ -1,0 +1,38 @@
+﻿body {
+    
+}
+
+.album-main{
+    margin: 0% 10%;
+    width: 80%;
+}
+
+.album-main .album-header{
+    margin: 0% 10%;
+    width: 100%;
+    
+}
+
+.album-header h2{
+    display: inline-block;
+    text-align: center;
+    width: 80%;
+    margin: 0% 10%;
+ 
+}
+
+.album-main .content{
+
+}
+
+.content .album {
+    display: inline-block;
+    margin: 0 5% 0 10%; 
+    width: 30%;
+    background-color: green;
+}
+
+.album h4{
+    text-align: center;
+
+}

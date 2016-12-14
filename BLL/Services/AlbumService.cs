@@ -42,5 +42,10 @@ namespace BLL.Services
             albumRepository.Delete(id);
             uow.Commit();
         }
+
+        public IEnumerable<AlbumEntity> GetAlbumsByLotId(int lotId)
+        {
+            return albumRepository.GetAlbumsByLotId(lotId).Select(e => e.ToBllAlbum());
+        }
     }
 }

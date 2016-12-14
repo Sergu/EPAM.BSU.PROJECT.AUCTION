@@ -10,5 +10,6 @@ namespace BLL.interfaces.Services
     public interface IPhotoService : IService<PhotoEntity>
     {
         PhotoEntity GetPhotoById(int id);
+        int CreatePhoto(PhotoEntity entity);
     }
 }
